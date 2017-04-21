@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">APK提取器</string>
+    <string name="tiqu">提取！</string>
+    <string name="dev">软件作者：随风的河蟹</string>
+    <string name="ok">确定</string>
+    <string name="tishi">提示</string>
+    <string name="success">文件备份成功！存放在 SD卡或内部存储根目录的MyBackAPK文件夹中</string>
+    <string name="failed">文件备份失败！</string>
+    <string name="is_has">文件已经存在，它在 SD卡或内部存储根目录的MyBackAPK文件夹中</string>
+    <string name="tiquzhong">提取中……</string>
+
+</resources>

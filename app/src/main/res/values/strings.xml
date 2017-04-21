@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GetAPK</string>
+    <string name="tiqu">pick up!</string>
+    <string name="dev">Software Developer:随风的河蟹</string>
+    <string name="ok">OK</string>
+    <string name="tishi">Tips</string>
+    <string name="success">File backup successful! Save in SD card or internal storage root in the MyBackAPK folder</string>
+    <string name="failed">File backup failed!</string>
+    <string name="is_has">The file already exists,It in SD card or internal storage root in the MyBackAPK folder</string>
+    <string name="tiquzhong">In the extraction……</string>
+
+</resources>
