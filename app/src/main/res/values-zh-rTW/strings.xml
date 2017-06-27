@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">APK提取器</string>
     <string name="tiqu">提取！</string>
-    <string name="dev">軟件作者：Technology GC</string>
+    <string name="dev">Technology GC</string>
     <string name="ok">確定</string>
     <string name="tishi">提示</string>
     <string name="success">文件備份成功！存放在 SD卡或內部存儲根目錄的MyBackAPK文件夾中</string>
