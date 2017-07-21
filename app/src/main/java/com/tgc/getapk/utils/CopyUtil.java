@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CopyUtil {
 
-    public static List<Boolean> backupApp(String packageName, Activity mActivity) {
+    public static List<Boolean> backupApp(String packageName, final Activity mActivity) {
         List<Boolean> resultList = new ArrayList<>();
         //存放位置
         String newFile = Environment.getExternalStorageDirectory()
@@ -68,10 +68,20 @@ public class CopyUtil {
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            Toast.makeText(mActivity,"error 001",Toast.LENGTH_SHORT).show();
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(mActivity,"error 001",Toast.LENGTH_SHORT).show();
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(mActivity,"error 002", Toast.LENGTH_SHORT).show();
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(mActivity,"error 002", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         return resultList;
     }

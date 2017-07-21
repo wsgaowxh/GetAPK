@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.tgc.getapk.utils.CopyUtil;
 import com.tgc.getapk.utils.ShowDialog;
@@ -48,16 +49,20 @@ public class CopyAsyncTask extends AsyncTask<Void,Void,List<Boolean>> {
     protected void onPostExecute(List<Boolean> result) {
         super.onPostExecute(result);
         progressDialog.dismiss();
-        if (!result.get(0)){
-            //不存在
-            if (result.get(1)){
-                ShowDialog.show(activity,activity.getString(R.string.ok),activity.getString(R.string.success));
-            }else {
-                ShowDialog.show(activity,activity.getString(R.string.ok),activity.getString(R.string.failed));
+        if (result.size() > 0) {
+            if (!result.get(0)){
+                //不存在
+                if (result.get(1)){
+                    ShowDialog.show(activity,activity.getString(R.string.ok),activity.getString(R.string.success));
+                }else {
+                    ShowDialog.show(activity,activity.getString(R.string.ok),activity.getString(R.string.failed));
+                }
+            }else if (result.get(0)){
+                //已存在
+                ShowDialog.show(activity,activity.getString(R.string.ok),activity.getString(R.string.is_has));
             }
-        }else if (result.get(0)){
-            //已存在
-            ShowDialog.show(activity,activity.getString(R.string.ok),activity.getString(R.string.is_has));
+        } else {
+            Toast.makeText(context, context.getString(R.string.not_found), Toast.LENGTH_SHORT).show();
         }
     }
 }

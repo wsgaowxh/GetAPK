@@ -9,5 +9,5 @@
     <string name="failed">文件備份失敗！</string>
     <string name="is_has">文件已經存在，它在 SD卡或內部存儲根目錄的MyBackAPK文件夾中</string>
     <string name="tiquzhong">提取中……</string>
-
+    <string name="not_found">應用未找到</string>
 </resources>
