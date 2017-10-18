@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/appbar_bkg</item>
+    </style>
+    <style name="ToolbarTitleAppearance">
+        <item name="android:textColor">@color/color_242424</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="ToolbarSubtitleAppearance">
+        <item name="android:textColor">@color/color_a0a0a0</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>

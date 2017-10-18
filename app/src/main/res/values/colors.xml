@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="appbar_bkg">#00aaff</color>
+    <color name="color_242424">#242424</color>
+    <color name="color_a0a0a0">#a0a0a0</color>
 </resources>

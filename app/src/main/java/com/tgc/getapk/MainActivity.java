@@ -10,7 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.tgc.getapk.adapter.APPAdapter;
-import com.tgc.getapk.utils.InitAPP;
+import com.tgc.getapk.common.asynctask.CopyAsyncTask;
+import com.tgc.getapk.common.utils.InitAPP;
 
 import java.util.List;
 
@@ -72,6 +73,6 @@ public class MainActivity extends AppCompatActivity implements APPAdapter.OnTitl
 
     @Override
     public void onTitleClick(String id) {
-        MainActivityPermissionsDispatcher.startCopyWithCheck(this,id);
+        MainActivityPermissionsDispatcher.startCopyWithPermissionCheck(this,id);
     }
 }
