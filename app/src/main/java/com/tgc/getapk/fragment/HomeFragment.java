@@ -94,7 +94,7 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
 
     @Override
     public void onTitleClick(String id) {
-        HomeFragmentPermissionsDispatcher.startCopyWithPermissionCheck(this, id);
+        HomeFragmentPermissionsDispatcher.startCopyWithCheck(this, id);
     }
 
     @Override
