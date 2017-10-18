@@ -45,6 +45,8 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void setupView();
 
+    protected abstract void initPresenter();
+
     protected View mRootView;
 
     private Unbinder mUnbinder;
@@ -82,6 +84,7 @@ public abstract class BaseFragment extends Fragment {
                 return true;
             }
         });
+        initPresenter();
         setupView();
         init();
         return mRootView;
@@ -165,6 +168,10 @@ public abstract class BaseFragment extends Fragment {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+    }
+
+    protected void setupToolbar(@StringRes int title, Toolbar toolbar, @DrawableRes int icon) {
+        setupToolbar(getString(title), toolbar, icon);
     }
 
     protected void showToast(String toast) {

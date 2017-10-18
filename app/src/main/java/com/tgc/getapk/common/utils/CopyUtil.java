@@ -1,9 +1,9 @@
 package com.tgc.getapk.common.utils;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.widget.Toast;
+
+import com.tgc.getapk.base.App;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CopyUtil {
 
-    public static List<Boolean> backupApp(String packageName, final Activity mActivity) {
+    public static List<Boolean> backupApp(String packageName) {
         List<Boolean> resultList = new ArrayList<>();
         //存放位置
         String newFile = Environment.getExternalStorageDirectory()
@@ -28,24 +28,24 @@ public class CopyUtil {
         FileOutputStream fos;
         try {
             //原始位置
-            oldFile = mActivity.getPackageManager().getApplicationInfo(
+            oldFile = App.getContext().getPackageManager().getApplicationInfo(
                     packageName, 0).sourceDir;
 
             File in = new File(oldFile);
-            File file=new File(newFile);
-            if (!file.exists()){
+            File file = new File(newFile);
+            if (!file.exists()) {
                 file.mkdirs();
             }
             File out = new File(newFile + packageName + ".apk");
-            boolean isCreat=out.exists();
+            boolean isCreat = out.exists();
             //情况1：isCreat=false，isOK有值
             //情况2：isCreat=true，isOK没有值
             if (!isCreat) {
                 resultList.add(isCreat);
                 boolean isOK = out.createNewFile();
-                if (isOK){
+                if (isOK) {
                     resultList.add(isOK);
-                }else {
+                } else {
                     resultList.add(isOK);
                 }
             } else {
@@ -68,20 +68,8 @@ public class CopyUtil {
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            mActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(mActivity,"error 001",Toast.LENGTH_SHORT).show();
-                }
-            });
         } catch (IOException e) {
             e.printStackTrace();
-            mActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(mActivity,"error 002", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
         return resultList;
     }

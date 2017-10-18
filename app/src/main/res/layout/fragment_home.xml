@@ -1,13 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tgc.getapk.mvp.fragment.HomeFragment">
+    tools:context="com.tgc.getapk.fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/bar_ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <include layout="@layout/appbar_layout" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/bar_ll"
+        android:id="@+id/main_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="26dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:text="@string/dev"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:paddingBottom="3dp"/>
+
+</RelativeLayout>

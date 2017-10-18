@@ -29,18 +29,18 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
     private RecyclerView recyclerView;
     public OnTitleClickListener mListener;
 
-    public APPAdapter(Context context, List<ResolveInfo> dataList, PackageManager pm){
+    public APPAdapter(Context context, List<ResolveInfo> dataList, PackageManager pm) {
         this.context = context;
         this.dataList = dataList;
         this.layoutInflater = LayoutInflater.from(context);
-        this.pm=pm;
+        this.pm = pm;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ResolveInfo resolveInfo=dataList.get(position);
-        CharSequence appName=resolveInfo.loadLabel(pm);
-        Drawable appIcon=resolveInfo.loadIcon(pm);
+        ResolveInfo resolveInfo = dataList.get(position);
+        CharSequence appName = resolveInfo.loadLabel(pm);
+        Drawable appIcon = resolveInfo.loadIcon(pm);
         holder.name.setText(appName);
         holder.icon.setImageDrawable(appIcon);
 
@@ -55,16 +55,16 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=this.layoutInflater.inflate(R.layout.main_item,parent,false);
-        MyViewHolder myViewHolder=new MyViewHolder(view);
+        View view = this.layoutInflater.inflate(R.layout.main_item, parent, false);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
-    public class ClickListener implements View.OnClickListener{
+    public class ClickListener implements View.OnClickListener {
         private String id;
 
-        public ClickListener(String id){
-            this.id=id;
+        public ClickListener(String id) {
+            this.id = id;
         }
 
         @Override
@@ -93,16 +93,16 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         this.recyclerView = null;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name;
         public Button pick;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            icon= (ImageView) itemView.findViewById(R.id.item_icon);
-            name= (TextView) itemView.findViewById(R.id.item_name);
-            pick= (Button) itemView.findViewById(R.id.item_pick);
+            icon = (ImageView) itemView.findViewById(R.id.item_icon);
+            name = (TextView) itemView.findViewById(R.id.item_name);
+            pick = (Button) itemView.findViewById(R.id.item_pick);
         }
     }
 
@@ -111,6 +111,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
     }
 
     public interface OnTitleClickListener {//自己写了一个点击事件的接口
+
         void onTitleClick(String id);
     }
 
