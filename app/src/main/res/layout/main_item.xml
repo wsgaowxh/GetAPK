@@ -18,10 +18,10 @@
     
     <TextView
         android:id="@+id/item_name"
-        android:layout_width="155dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="88dp"
+        android:layout_marginLeft="72dp"
         android:textColor="@color/color_242424"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
