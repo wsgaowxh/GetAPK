@@ -27,8 +27,7 @@ public class HomePresenter extends BasePresenter {
         iView.load(dataList);
     }
 
-    public void startCopy(String id, List<ResolveInfo> dataList, Context context) {
-        int appID = Integer.parseInt(id);
+    public void startCopy(int appID, List<ResolveInfo> dataList, Context context) {
         ResolveInfo app = dataList.get(appID);
         final String packName = app.activityInfo.packageName;
         CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, packName);

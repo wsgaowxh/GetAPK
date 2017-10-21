@@ -93,7 +93,7 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
     }
 
     @Override
-    public void onTitleClick(String id) {
+    public void onTitleClick(int id) {
         presenter.startCopy(id, dataList, getContext());
     }
 

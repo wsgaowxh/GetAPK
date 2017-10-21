@@ -44,7 +44,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         holder.name.setText(appName);
         holder.icon.setImageDrawable(appIcon);
 
-        holder.pick.setOnClickListener(new ClickListener(String.valueOf(position)));
+        holder.pick.setOnClickListener(new ClickListener(position));
 
     }
 
@@ -61,9 +61,9 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
     }
 
     public class ClickListener implements View.OnClickListener {
-        private String id;
+        private int id;
 
-        public ClickListener(String id) {
+        public ClickListener(int id) {
             this.id = id;
         }
 
@@ -112,7 +112,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
 
     public interface OnTitleClickListener {//自己写了一个点击事件的接口
 
-        void onTitleClick(String id);
+        void onTitleClick(int id);
     }
 
 }
