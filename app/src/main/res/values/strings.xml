@@ -9,4 +9,5 @@
     <string name="is_has">The file already exists,It in SD card or internal storage root in the MyBackAPK folder</string>
     <string name="tiquzhong">In the extraction……</string>
     <string name="not_found">App not found</string>
+    <string name="setting">settings</string>
 </resources>

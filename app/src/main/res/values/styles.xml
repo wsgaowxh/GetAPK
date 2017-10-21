@@ -14,8 +14,9 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="colorControlNormal">@color/appbar_bkg</item>
+        <item name="colorControlNormal">@color/color_242424</item>
     </style>
+
     <style name="ToolbarTitleAppearance">
         <item name="android:textColor">@color/color_242424</item>
         <item name="android:textSize">20sp</item>

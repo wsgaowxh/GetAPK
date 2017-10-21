@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.tgc.getapk.R;
 import com.tgc.getapk.adapter.APPAdapter;
@@ -29,7 +30,8 @@ import permissions.dispatcher.RuntimePermissions;
  */
 
 @RuntimePermissions
-public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClickListener, HomeView {
+public class HomeFragment extends BaseFragment implements HomeView, APPAdapter.OnTitleClickListener,
+        Toolbar.OnMenuItemClickListener{
     public static final String TAG = "HomeFragment";
 
     @BindView(R.id.main_rv)
@@ -56,12 +58,16 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
     @Override
     protected void init() {
         pm = App.getContext().getPackageManager();
+        toolbar.setOnMenuItemClickListener(this);
 //        presenter.load();
     }
 
     @Override
     protected void setupView() {
         setupToolbar(R.string.app_name, toolbar, 0);
+        toolbar.getMenu().clear();
+        setHasOptionsMenu(true);
+        toolbar.inflateMenu(R.menu.menu_home);
     }
 
     @Override
@@ -105,5 +111,16 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
         appAdapter.setOnTitleClickListener(this);
         recyclerView.setAdapter(appAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_setting:
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 }

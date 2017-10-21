@@ -10,4 +10,5 @@
     <string name="is_has">文件已经存在，它在 SD卡或内部存储根目录的MyBackAPK文件夹中</string>
     <string name="tiquzhong">提取中……</string>
     <string name="not_found">应用未找到</string>
+    <string name="setting">设置</string>
 </resources>
