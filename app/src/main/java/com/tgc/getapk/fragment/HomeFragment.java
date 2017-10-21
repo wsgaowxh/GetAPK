@@ -67,6 +67,11 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
     @Override
     public void onResume() {
         super.onResume();
+        HomeFragmentPermissionsDispatcher.loadWithCheck(this);
+    }
+
+    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
+    public void load() {
         presenter.load();
     }
 
@@ -74,11 +79,6 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
     public void onDestroyView() {
         super.onDestroyView();
         presenter.detachView();
-    }
-
-    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    public void startCopy(String id) {
-        presenter.startCopy(id, dataList, getContext());
     }
 
     @OnPermissionDenied({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
@@ -94,7 +94,7 @@ public class HomeFragment extends BaseFragment implements APPAdapter.OnTitleClic
 
     @Override
     public void onTitleClick(String id) {
-        HomeFragmentPermissionsDispatcher.startCopyWithCheck(this, id);
+        presenter.startCopy(id, dataList, getContext());
     }
 
     @Override
