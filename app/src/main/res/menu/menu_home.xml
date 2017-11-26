@@ -2,8 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/menu_share"
+        android:title="@string/share"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/menu_pick"
+        android:title="@string/tiqu"
+        app:showAsAction="ifRoom"/>
+
     <item android:id="@+id/menu_setting"
         android:title="@string/setting"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_about"
+        android:title="@string/about"
         app:showAsAction="never"/>
 
 </menu>

@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by TGC on 2017/4/16.
@@ -18,8 +16,9 @@ import java.util.List;
 
 public class CopyUtil {
 
-    public static List<Boolean> backupApp(String packageName) {
-        List<Boolean> resultList = new ArrayList<>();
+    public static int backupApp(String packageName) {
+//        List<Boolean> resultList = new ArrayList<>();
+        int resultCode = 0;
         //存放位置
         String newFile = Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + File.separator + "MyBackAPK" + File.separator;
@@ -41,15 +40,18 @@ public class CopyUtil {
             //情况1：isCreat=false，isOK有值
             //情况2：isCreat=true，isOK没有值
             if (!isCreat) {
-                resultList.add(isCreat);
+//                resultList.add(isCreat);
                 boolean isOK = out.createNewFile();
                 if (isOK) {
-                    resultList.add(isOK);
+//                    resultList.add(isOK);
+                    resultCode = 1;
                 } else {
-                    resultList.add(isOK);
+//                    resultList.add(isOK);
+                    resultCode = 2;
                 }
             } else {
-                resultList.add(isCreat);
+//                resultList.add(isCreat);
+                resultCode = 3;
             }
 
             fis = new FileInputStream(in);
@@ -71,7 +73,7 @@ public class CopyUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return resultList;
+        return resultCode;
     }
 
 }

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.tgc.getapk.R;
@@ -30,7 +31,7 @@ import permissions.dispatcher.RuntimePermissions;
  */
 
 @RuntimePermissions
-public class HomeFragment extends BaseFragment implements HomeView, APPAdapter.OnTitleClickListener,
+public class HomeFragment extends BaseFragment implements HomeView,
         Toolbar.OnMenuItemClickListener{
     public static final String TAG = "HomeFragment";
 
@@ -98,17 +99,17 @@ public class HomeFragment extends BaseFragment implements HomeView, APPAdapter.O
         HomeFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
-    @Override
-    public void onTitleClick(int id) {
-        presenter.startCopy(id, dataList, getContext());
-    }
+//    @Override
+//    public void onTitleClick(int id) {
+//        presenter.startCopy(id, dataList, getContext());
+//    }
 
     @Override
     public void load(List<ResolveInfo> dataList) {
         this.dataList = dataList;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
         appAdapter = new APPAdapter(App.getContext(), dataList, pm);
-        appAdapter.setOnTitleClickListener(this);
+//        appAdapter.setOnTitleClickListener(this);
         recyclerView.setAdapter(appAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
@@ -117,6 +118,16 @@ public class HomeFragment extends BaseFragment implements HomeView, APPAdapter.O
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_setting:
+                break;
+            case R.id.menu_share:
+                break;
+            case R.id.menu_about:
+                break;
+            case R.id.menu_pick:
+                List<Integer> checkList = appAdapter.getCheckList();
+                for (int i = 0; i < checkList.size(); i++) {
+                    Log.i(TAG, "onMenuItemClick: " + checkList.get(i));
+                }
                 break;
             default:
                 break;

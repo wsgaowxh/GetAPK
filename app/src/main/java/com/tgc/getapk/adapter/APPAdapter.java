@@ -5,15 +5,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tgc.getapk.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,26 +28,51 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
     private Context context;
     private LayoutInflater layoutInflater;
     private PackageManager pm;
+    private SparseBooleanArray checkStates;
+    private List<Integer> checkList;
 
     private RecyclerView recyclerView;
-    public OnTitleClickListener mListener;
+//    public OnTitleClickListener mListener;
 
     public APPAdapter(Context context, List<ResolveInfo> dataList, PackageManager pm) {
         this.context = context;
         this.dataList = dataList;
         this.layoutInflater = LayoutInflater.from(context);
         this.pm = pm;
+        checkStates = new SparseBooleanArray();
+        checkList = new ArrayList<>();
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         ResolveInfo resolveInfo = dataList.get(position);
         CharSequence appName = resolveInfo.loadLabel(pm);
         Drawable appIcon = resolveInfo.loadIcon(pm);
         holder.name.setText(appName);
         holder.icon.setImageDrawable(appIcon);
 
-        holder.pick.setOnClickListener(new ClickListener(position));
+        holder.pick.setTag(position);
+        holder.pick.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int pos = (int) buttonView.getTag();
+                if (isChecked) {
+                    checkStates.put(pos, true);
+                    if (checkList.indexOf(pos) == -1) {
+                        checkList.add(pos);
+                    }
+                } else {
+                    checkStates.delete(pos);
+                    int i = checkList.indexOf(pos);
+                    if (i != -1) {
+                        checkList.remove(i);
+                    }
+                }
+            }
+        });
+        holder.pick.setChecked(checkStates.get(position, false));
+
+//        holder.pick.setOnClickListener(new ClickListener(position));
 
     }
 
@@ -60,20 +88,25 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         return myViewHolder;
     }
 
-    public class ClickListener implements View.OnClickListener {
-        private int id;
-
-        public ClickListener(int id) {
-            this.id = id;
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mListener != null) {
-                mListener.onTitleClick(id);
-            }
-        }
+    public List<Integer> getCheckList() {
+        return checkList;
     }
+
+
+//    public class ClickListener implements View.OnClickListener {
+//        private int id;
+//
+//        public ClickListener(int id) {
+//            this.id = id;
+//        }
+//
+//        @Override
+//        public void onClick(View v) {
+//            if (mListener != null) {
+//                mListener.onTitleClick(id);
+//            }
+//        }
+//    }
 
     /*
     *当adapter与recyclerview关联的时候调用
@@ -96,23 +129,23 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
     class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name;
-        public Button pick;
+        public CheckBox pick;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView) itemView.findViewById(R.id.item_icon);
             name = (TextView) itemView.findViewById(R.id.item_name);
-            pick = (Button) itemView.findViewById(R.id.item_pick);
+            pick = (CheckBox) itemView.findViewById(R.id.item_pick);
         }
     }
 
-    public void setOnTitleClickListener(OnTitleClickListener listener) {//自己写了一个方法，用上我们的接口
-        mListener = listener;
-    }
-
-    public interface OnTitleClickListener {//自己写了一个点击事件的接口
-
-        void onTitleClick(int id);
-    }
+//    public void setOnTitleClickListener(OnTitleClickListener listener) {//自己写了一个方法，用上我们的接口
+//        mListener = listener;
+//    }
+//
+//    public interface OnTitleClickListener {//自己写了一个点击事件的接口
+//
+//        void onTitleClick(int id);
+//    }
 
 }

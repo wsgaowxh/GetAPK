@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">APK提取器</string>
-    <string name="tiqu">提取！</string>
+    <string name="tiqu">提取</string>
     <string name="dev">Technology GC</string>
     <string name="ok">確定</string>
     <string name="tishi">提示</string>
-    <string name="success">文件備份成功！存放在 SD卡或內部存儲根目錄的MyBackAPK文件夾中</string>
-    <string name="failed">文件備份失敗！</string>
-    <string name="is_has">文件已經存在，它在 SD卡或內部存儲根目錄的MyBackAPK文件夾中</string>
+    <string name="success">檔案備份成功！存放在 SD卡或內部存儲根目錄的MyBackAPK文件夾中，若已存在同名檔案則該檔案不會備份</string>
+    <string name="failed">檔案備份失敗！</string>
+    <string name="is_has">檔案已經存在，它在 SD卡或內部存儲根目錄的MyBackAPK文件夾中</string>
     <string name="tiquzhong">提取中……</string>
     <string name="not_found">應用未找到</string>
     <string name="setting">設定</string>
+    <string name="share">分享</string>
+    <string name="about">關於</string>
 </resources>
