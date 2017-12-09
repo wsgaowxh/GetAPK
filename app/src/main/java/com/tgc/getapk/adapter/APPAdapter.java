@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tgc.getapk.R;
+import com.tgc.getapk.base.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,16 +63,25 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
                     if (checkList.indexOf(pos) == -1) {
                         checkList.add(pos);
                     }
+                    holder.rl.setBackgroundColor(App.getContext().getResources().getColor(R.color.color_select));
                 } else {
                     checkStates.delete(pos);
                     int i = checkList.indexOf(pos);
                     if (i != -1) {
                         checkList.remove(i);
                     }
+                    holder.rl.setBackgroundColor(App.getContext().getResources().getColor(R.color.white));
                 }
             }
         });
-        holder.pick.setChecked(checkStates.get(position, false));
+        boolean check = checkStates.get(position, false);
+        holder.pick.setChecked(check);
+        if (check) {
+            holder.rl.setBackgroundColor(App.getContext().getResources().getColor(R.color.color_select));
+        } else {
+            holder.rl.setBackgroundColor(App.getContext().getResources().getColor(R.color.white));
+        }
+
 
 //        holder.pick.setOnClickListener(new ClickListener(position));
 
@@ -130,12 +141,14 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         public ImageView icon;
         public TextView name;
         public CheckBox pick;
+        public RelativeLayout rl;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView) itemView.findViewById(R.id.item_icon);
             name = (TextView) itemView.findViewById(R.id.item_name);
             pick = (CheckBox) itemView.findViewById(R.id.item_pick);
+            rl = (RelativeLayout) itemView.findViewById(R.id.item_rl);
         }
     }
 
