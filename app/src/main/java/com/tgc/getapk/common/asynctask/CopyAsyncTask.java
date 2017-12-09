@@ -2,11 +2,14 @@ package com.tgc.getapk.common.asynctask;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 
 import com.tgc.getapk.R;
 import com.tgc.getapk.common.utils.CopyUtil;
 import com.tgc.getapk.common.utils.DialogUtils;
+
+import java.util.List;
 
 /**
  * Created by TGC on 2017/4/18.
@@ -14,12 +17,14 @@ import com.tgc.getapk.common.utils.DialogUtils;
 
 public class CopyAsyncTask extends AsyncTask<Void, Void, Integer> {
     private Context context;
-    private String packName;
+    private List<Integer> appID;
+    private List<ResolveInfo> dataList;
     private ProgressDialog progressDialog;
 
-    public CopyAsyncTask(Context context, String packName) {
+    public CopyAsyncTask(Context context, List<Integer> appID, List<ResolveInfo> dataList) {
         this.context = context;
-        this.packName = packName;
+        this.appID = appID;
+        this.dataList = dataList;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class CopyAsyncTask extends AsyncTask<Void, Void, Integer> {
     @Override
     protected Integer doInBackground(Void... params) {
 
-        int resultCode = CopyUtil.backupApp(packName);
+        int resultCode = CopyUtil.backupApp(appID, dataList);
 
         return resultCode;
     }

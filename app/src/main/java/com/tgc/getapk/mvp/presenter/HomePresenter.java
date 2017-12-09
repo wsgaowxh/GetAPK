@@ -27,10 +27,15 @@ public class HomePresenter extends BasePresenter {
         iView.load(dataList);
     }
 
-    public void startCopy(int appID, List<ResolveInfo> dataList, Context context) {
-        ResolveInfo app = dataList.get(appID);
-        final String packName = app.activityInfo.packageName;
-        CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, packName);
+//    public void startCopy(int appID, List<ResolveInfo> dataList, Context context) {
+//        ResolveInfo app = dataList.get(appID);
+//        final String packName = app.activityInfo.packageName;
+//        CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, packName);
+//        copyAsyncTask.execute();
+//    }
+
+    public void startCopyWithList(List<Integer> appID, List<ResolveInfo> dataList, Context context) {
+        CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, appID, dataList);
         copyAsyncTask.execute();
     }
 

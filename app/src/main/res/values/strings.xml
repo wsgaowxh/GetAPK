@@ -13,4 +13,5 @@
     <string name="setting">settings</string>
     <string name="share">share</string>
     <string name="about">about</string>
+    <string name="select_null">Need to choose the APP you want to pick up</string>
 </resources>

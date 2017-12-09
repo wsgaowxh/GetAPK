@@ -5,11 +5,11 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.tgc.getapk.R;
@@ -117,17 +117,19 @@ public class HomeFragment extends BaseFragment implements HomeView,
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_setting:
-                break;
-            case R.id.menu_share:
-                break;
-            case R.id.menu_about:
-                break;
+//            case R.id.menu_setting:
+//                break;
+//            case R.id.menu_share:
+//                break;
+//            case R.id.menu_about:
+//                break;
             case R.id.menu_pick:
                 List<Integer> checkList = appAdapter.getCheckList();
-                for (int i = 0; i < checkList.size(); i++) {
-                    Log.i(TAG, "onMenuItemClick: " + checkList.get(i));
+                if (checkList == null || checkList.isEmpty()) {
+                    Snackbar.make(getRootView(), R.string.select_null, Snackbar.LENGTH_LONG).show();
+                    break;
                 }
+                presenter.startCopyWithList(checkList, dataList, getContext());
                 break;
             default:
                 break;

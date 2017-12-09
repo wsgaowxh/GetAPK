@@ -13,4 +13,5 @@
     <string name="setting">設定</string>
     <string name="share">分享</string>
     <string name="about">關於</string>
+    <string name="select_null">需要選擇希望備份的程序哦</string>
 </resources>
