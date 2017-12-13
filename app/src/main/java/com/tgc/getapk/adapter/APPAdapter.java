@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -140,14 +140,14 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
     class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView icon;
         public TextView name;
-        public AppCompatCheckBox pick;
+        public CheckBox pick;
         public RelativeLayout rl;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             icon = (ImageView) itemView.findViewById(R.id.item_icon);
             name = (TextView) itemView.findViewById(R.id.item_name);
-            pick = (AppCompatCheckBox) itemView.findViewById(R.id.item_pick);
+            pick = (CheckBox) itemView.findViewById(R.id.item_pick);
             rl = (RelativeLayout) itemView.findViewById(R.id.item_rl);
         }
     }
