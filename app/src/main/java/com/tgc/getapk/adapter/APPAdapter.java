@@ -103,6 +103,33 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         return checkList;
     }
 
+    public void selectAll() {
+        for (int i = 0; i < dataList.size(); i++) {
+            int index = checkList.indexOf(i);
+            if (index == -1) {
+                checkStates.put(i, true);
+                checkList.add(i);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void antiSelectAll() {
+        for (int i = 0; i < dataList.size(); i++) {
+            if (checkStates.get(i)) {
+                checkStates.put(i, false);
+                int index = checkList.indexOf(i);
+                if (index != -1) {
+                    checkList.remove(index);
+                }
+            } else {
+                checkStates.put(i, true);
+                checkList.add(i);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 
 //    public class ClickListener implements View.OnClickListener {
 //        private int id;

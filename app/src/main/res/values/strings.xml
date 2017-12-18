@@ -14,4 +14,6 @@
     <string name="share">share</string>
     <string name="about">about</string>
     <string name="select_null">Need to choose the APP you want to pick up</string>
+    <string name="select_all">Select all</string>
+    <string name="invert_selection">Invert selection</string>
 </resources>

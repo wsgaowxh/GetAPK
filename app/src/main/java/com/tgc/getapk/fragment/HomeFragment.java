@@ -131,6 +131,12 @@ public class HomeFragment extends BaseFragment implements HomeView,
                 }
                 presenter.startCopyWithList(checkList, dataList, getContext());
                 break;
+            case R.id.menu_all:
+                appAdapter.selectAll();
+                break;
+            case R.id.menu_anti_all:
+                appAdapter.antiSelectAll();
+                break;
             default:
                 break;
         }

@@ -10,6 +10,14 @@
         android:title="@string/tiqu"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/menu_all"
+        android:title="@string/select_all"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_anti_all"
+        android:title="@string/invert_selection"
+        app:showAsAction="never"/>
+
     <!--<item android:id="@+id/menu_setting"-->
         <!--android:title="@string/setting"-->
         <!--app:showAsAction="never"/>-->
