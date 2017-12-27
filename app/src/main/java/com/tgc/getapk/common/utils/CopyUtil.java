@@ -37,7 +37,8 @@ public class CopyUtil {
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-                File out = new File(newFile + packageName + ".apk");
+                String filePath = newFile + packageName + ".apk";
+                File out = new File(filePath);
                 boolean isCreat = out.exists();
                 //情况1：isCreat=false，isOK有值
                 //情况2：isCreat=true，isOK没有值
@@ -47,6 +48,7 @@ public class CopyUtil {
                     if (isOK) {
 //                    resultList.add(isOK);
                         resultCode = 1;
+                        Utils.scanFile(filePath);
                     } else {
 //                    resultList.add(isOK);
                         resultCode = 2;
