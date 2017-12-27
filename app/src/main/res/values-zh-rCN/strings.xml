@@ -19,4 +19,5 @@
     <string name="dir_select">文件夹选择</string>
     <string name="back_path">备份目录:</string>
     <string name="path_success">选择成功</string>
+    <string name="about_app">本软件由Technology GC开发</string>
 </resources>

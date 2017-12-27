@@ -19,4 +19,5 @@
     <string name="dir_select">資料夾選擇</string>
     <string name="back_path">資料夾:</string>
     <string name="path_success">選擇成功</string>
+    <string name="about_app">本軟件由Technology GC開發</string>
 </resources>

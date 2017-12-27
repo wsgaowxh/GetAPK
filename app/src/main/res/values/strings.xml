@@ -19,4 +19,5 @@
     <string name="dir_select">Folder selection</string>
     <string name="back_path">Backup path:</string>
     <string name="path_success">Choose success</string>
+    <string name="about_app">This software is developed by Technology GC</string>
 </resources>

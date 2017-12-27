@@ -16,7 +16,9 @@ import com.leon.lfilepickerlibrary.utils.Constant;
 import com.tgc.getapk.R;
 import com.tgc.getapk.base.BaseFragment;
 import com.tgc.getapk.common.C;
+import com.tgc.getapk.common.utils.DialogUtils;
 import com.tgc.getapk.common.utils.PreferencesHelper;
+import com.tgc.getapk.common.utils.Utils;
 import com.tgc.getapk.mvp.view.SettingsView;
 
 import java.io.File;
@@ -71,6 +73,14 @@ public class SettingFragment extends BaseFragment implements SettingsView,
                         .start();
                 break;
             case 1:
+                String version = Utils.getVersion();
+                if (version == null) {
+                    Snackbar.make(getRootView(), R.string.about_app, Snackbar.LENGTH_SHORT).show();
+                    break;
+                }
+                version = "Version: V" + version;
+                DialogUtils.alert(getContext(), R.string.about, version + "\n"
+                        + getResources().getString(R.string.about_app));
                 break;
             default:
                 break;
