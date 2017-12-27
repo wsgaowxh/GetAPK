@@ -2,7 +2,6 @@ package com.tgc.getapk.common.utils;
 
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Environment;
 
 import com.tgc.getapk.base.App;
 
@@ -22,8 +21,7 @@ public class CopyUtil {
 //        List<Boolean> resultList = new ArrayList<>();
         int resultCode = 0;
         //存放位置
-        String newFile = Environment.getExternalStorageDirectory()
-                .getAbsolutePath() + File.separator + "MyBackAPK" + File.separator;
+        String newFile = PreferencesHelper.getPath();
         String oldFile;
         FileInputStream fis = null;
         FileOutputStream fos = null;

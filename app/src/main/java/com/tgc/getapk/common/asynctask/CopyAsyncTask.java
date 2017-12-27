@@ -6,8 +6,10 @@ import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 
 import com.tgc.getapk.R;
+import com.tgc.getapk.base.App;
 import com.tgc.getapk.common.utils.CopyUtil;
 import com.tgc.getapk.common.utils.DialogUtils;
+import com.tgc.getapk.common.utils.PreferencesHelper;
 
 import java.util.List;
 
@@ -49,15 +51,17 @@ public class CopyAsyncTask extends AsyncTask<Void, Void, Integer> {
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
         progressDialog.dismiss();
+        String str = App.getAppResources().getString(R.string.success);
+        str = String.format(str, PreferencesHelper.getPath());
         switch (result) {
             case 1:
-                DialogUtils.alert(context, R.string.ok, R.string.success);
+                DialogUtils.alert(context, R.string.ok, str);
                 break;
             case 2:
                 DialogUtils.alert(context, R.string.ok, R.string.failed);
                 break;
             case 3:
-                DialogUtils.alert(context, R.string.ok, R.string.success);
+                DialogUtils.alert(context, R.string.ok, str);
                 break;
             default:
                 break;

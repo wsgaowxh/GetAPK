@@ -4,7 +4,7 @@
     <string name="dev">Technology GC</string>
     <string name="ok">OK</string>
     <string name="tishi">Tips</string>
-    <string name="success">File backup successful! Save in SD card or internal storage root in the MyBackAPK folder,
+    <string name="success">File backup successful! Save in %1$s,
         If there is a file with the same name, the file will not be backed up</string>
     <string name="failed">File backup failed!</string>
     <string name="is_has">The file already exists,It in SD card or internal storage root in the MyBackAPK folder</string>
@@ -16,4 +16,7 @@
     <string name="select_null">Need to choose the APP you want to pick up</string>
     <string name="select_all">Select all</string>
     <string name="invert_selection">Invert selection</string>
+    <string name="dir_select">Folder selection</string>
+    <string name="back_path">Backup path:</string>
+    <string name="path_success">Choose success</string>
 </resources>

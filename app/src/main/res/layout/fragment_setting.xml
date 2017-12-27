@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.tgc.getapk.fragment.SettingFragment">
+
+    <LinearLayout
+        android:id="@+id/bar_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/appbar_layout" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:entries="@array/settings_arr">
+
+    </ListView>
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_arr">
+        <item>備份路徑</item>
+        <item>關於</item>
+    </string-array>
+</resources>

@@ -6,6 +6,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import com.tgc.getapk.R;
+import com.tgc.getapk.base.App;
 
 /**
  * Created by TGC on 2017/4/16.
@@ -13,6 +14,11 @@ import com.tgc.getapk.R;
 
 public class DialogUtils {
     public static void alert(Context context, @StringRes int title, @StringRes int msg) {
+        String s = App.getAppResources().getString(msg);
+        alert(context, title, s);
+    }
+
+    public static void alert(Context context, @StringRes int title, String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(msg);

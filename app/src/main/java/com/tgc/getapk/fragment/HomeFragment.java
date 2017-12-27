@@ -11,11 +11,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.tgc.getapk.R;
 import com.tgc.getapk.adapter.APPAdapter;
 import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BaseFragment;
+import com.tgc.getapk.common.utils.PreferencesHelper;
 import com.tgc.getapk.mvp.presenter.HomePresenter;
 import com.tgc.getapk.mvp.view.HomeView;
 
@@ -32,13 +34,15 @@ import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class HomeFragment extends BaseFragment implements HomeView,
-        Toolbar.OnMenuItemClickListener{
+        Toolbar.OnMenuItemClickListener {
     public static final String TAG = "HomeFragment";
 
     @BindView(R.id.main_rv)
     RecyclerView recyclerView;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.path_tv)
+    TextView pathTv;
 
     private List<ResolveInfo> dataList;
     private PackageManager pm;
@@ -112,6 +116,7 @@ public class HomeFragment extends BaseFragment implements HomeView,
 //        appAdapter.setOnTitleClickListener(this);
         recyclerView.setAdapter(appAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
+        pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
     }
 
     @Override
@@ -136,6 +141,9 @@ public class HomeFragment extends BaseFragment implements HomeView,
                 break;
             case R.id.menu_anti_all:
                 appAdapter.antiSelectAll();
+                break;
+            case R.id.menu_setting:
+                addFragment(new SettingFragment(), SettingFragment.TAG, true);
                 break;
             default:
                 break;
