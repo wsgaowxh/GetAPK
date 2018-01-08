@@ -2,6 +2,9 @@ package com.tgc.getapk.mvp.presenter;
 
 import android.content.Context;
 import android.content.pm.ResolveInfo;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
 import com.tgc.getapk.base.BasePresenter;
 import com.tgc.getapk.base.BaseView;
@@ -11,7 +14,6 @@ import com.tgc.getapk.mvp.view.HomeView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by TGC on 2017/10/18.
@@ -24,18 +26,21 @@ public class HomePresenter extends BasePresenter {
     public void load() {
 //        ArrayList<ResolveInfo> dataList = InitAPP
 //                .initApp(App.getContext(), App.getContext().getPackageManager());
-        LoadAsyncTask loadAsyncTask = new LoadAsyncTask();
-        ArrayList<ResolveInfo> dataList = null;
-        try {
-            dataList = loadAsyncTask.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        if (dataList != null) {
-            iView.load(dataList);
-        }
+        Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (msg.what == 1) {
+                    Bundle data = msg.getData();
+                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList("resolveInfos");
+                    if (dataList != null) {
+                        iView.load(dataList);
+                    }
+                }
+            }
+        };
+        LoadAsyncTask loadAsyncTask = new LoadAsyncTask(handler);
+        loadAsyncTask.execute();
     }
 
 //    public void startCopy(int appID, List<ResolveInfo> dataList, Context context) {
