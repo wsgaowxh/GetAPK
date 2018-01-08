@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tgc.getapk.R;
@@ -43,6 +45,8 @@ public class HomeFragment extends BaseFragment implements HomeView,
     Toolbar toolbar;
     @BindView(R.id.path_tv)
     TextView pathTv;
+    @BindView(R.id.loading_pb)
+    ProgressBar loadingPb;
 
     private List<ResolveInfo> dataList;
     private PackageManager pm;
@@ -111,6 +115,8 @@ public class HomeFragment extends BaseFragment implements HomeView,
     @Override
     public void load(List<ResolveInfo> dataList) {
         this.dataList = dataList;
+        loadingPb.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
         appAdapter = new APPAdapter(App.getContext(), dataList, pm);
 //        appAdapter.setOnTitleClickListener(this);
