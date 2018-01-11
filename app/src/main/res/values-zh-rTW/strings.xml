@@ -20,4 +20,5 @@
     <string name="back_path">資料夾:</string>
     <string name="path_success">選擇成功</string>
     <string name="about_app">本軟件由Technology GC開發</string>
+    <string name="wait">請稍候</string>
 </resources>

@@ -135,6 +135,10 @@ public class HomeFragment extends BaseFragment implements HomeView,
 //            case R.id.menu_about:
 //                break;
             case R.id.menu_pick:
+                if (appAdapter == null) {
+                    Snackbar.make(getRootView(), R.string.wait, Snackbar.LENGTH_LONG).show();
+                    break;
+                }
                 List<Integer> checkList = appAdapter.getCheckList();
                 if (checkList == null || checkList.isEmpty()) {
                     Snackbar.make(getRootView(), R.string.select_null, Snackbar.LENGTH_LONG).show();
