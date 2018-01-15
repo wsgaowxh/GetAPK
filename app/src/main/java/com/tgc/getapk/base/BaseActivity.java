@@ -8,12 +8,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by imco on 11/13/15.
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-//    private Unbinder mUnbinder;
+    private Unbinder mUnbinder;
 
     protected abstract int getLayout();
 
@@ -34,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
-//        mUnbinder = ButterKnife.bind(this);
+        mUnbinder = ButterKnife.bind(this);
         setupView();
         init();
     }
@@ -48,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        mUnbinder.unbind();
+        mUnbinder.unbind();
     }
 
     public DrawerLayout getDrawerLayout() {

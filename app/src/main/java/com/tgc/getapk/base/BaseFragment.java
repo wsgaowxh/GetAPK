@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.tgc.getapk.R;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by ivan on 17-4-11.
  */
@@ -46,7 +49,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected View mRootView;
 
-//    private Unbinder mUnbinder;
+    private Unbinder mUnbinder;
 
     private BasePresenter mPresenter;
 
@@ -74,7 +77,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mRootView = inflater.inflate(getLayout(), container, false);
-//        mUnbinder = ButterKnife.bind(this, mRootView);
+        mUnbinder = ButterKnife.bind(this, mRootView);
         mRootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -90,7 +93,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-//        mUnbinder.unbind();
+        mUnbinder.unbind();
         if (mPresenter != null) {
             mPresenter.detachView();
         }
