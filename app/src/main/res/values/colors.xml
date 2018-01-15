@@ -9,4 +9,7 @@
     <color name="color_242424">#242424</color>
     <color name="color_a0a0a0">#a0a0a0</color>
     <color name="color_select">#EAEAEA</color>
+    <color name="color_dddddd">#dddddd</color>
+    <color name="btn_ripple">#AA31379F</color>
+    <color name="item_ripple">#AAa0a0a0</color>
 </resources>

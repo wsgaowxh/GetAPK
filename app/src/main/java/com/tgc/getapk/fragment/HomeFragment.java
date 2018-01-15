@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.tgc.getapk.R;
 import com.tgc.getapk.adapter.APPAdapter;
 import com.tgc.getapk.base.App;
-import com.tgc.getapk.base.BaseFragment;
+import com.tgc.getapk.base.BaseResumeFragment;
 import com.tgc.getapk.common.utils.PreferencesHelper;
 import com.tgc.getapk.mvp.presenter.HomePresenter;
 import com.tgc.getapk.mvp.view.HomeView;
@@ -31,7 +31,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 
-public class HomeFragment extends BaseFragment implements HomeView,
+public class HomeFragment extends BaseResumeFragment implements HomeView,
         Toolbar.OnMenuItemClickListener {
     public static final String TAG = "HomeFragment";
 
@@ -177,5 +177,10 @@ public class HomeFragment extends BaseFragment implements HomeView,
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onFragmentResume() {
+        pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
     }
 }

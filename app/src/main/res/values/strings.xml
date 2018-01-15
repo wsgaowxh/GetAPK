@@ -21,4 +21,7 @@
     <string name="path_success">Choose success</string>
     <string name="about_app">This software is developed by Technology GC</string>
     <string name="wait">Please wait</string>
+    <string name="directory">Directory</string>
+    <string name="select_dir">Select Directory</string>
+    <string name="upper">Previous level</string>
 </resources>

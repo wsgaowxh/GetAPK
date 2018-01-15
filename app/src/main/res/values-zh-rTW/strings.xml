@@ -21,4 +21,7 @@
     <string name="path_success">選擇成功</string>
     <string name="about_app">本軟件由Technology GC開發</string>
     <string name="wait">請稍候</string>
+    <string name="directory">目錄</string>
+    <string name="select_dir">選擇目錄</string>
+    <string name="upper">上一級</string>
 </resources>

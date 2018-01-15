@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:id="@+id/layout_item_root"
+    android:clickable="true"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/item_ripple"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp">
+
+    <ImageView
+        android:id="@+id/iv_type"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/file_style_blue"/>
+
+    <LinearLayout
+        android:id="@+id/layout_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/iv_type"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_name"
+            android:layout_marginTop="9dp"
+            android:textSize="16sp"
+            android:textColor="@color/color_242424"
+            android:text="文件名"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_a0a0a0"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:id="@+id/tv_detail"
+            android:text="文件"/>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@id/layout_info"
+        android:layout_marginTop="6dp"
+        android:background="@color/color_dddddd"/>
+
+</RelativeLayout>
