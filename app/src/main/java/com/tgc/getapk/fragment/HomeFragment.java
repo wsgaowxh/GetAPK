@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -23,18 +24,15 @@ import com.tgc.getapk.common.utils.PreferencesHelper;
 import com.tgc.getapk.mvp.presenter.HomePresenter;
 import com.tgc.getapk.mvp.view.HomeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.RuntimePermissions;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 
-@RuntimePermissions
 public class HomeFragment extends BaseFragment implements HomeView,
         Toolbar.OnMenuItemClickListener {
     public static final String TAG = "HomeFragment";
@@ -52,6 +50,10 @@ public class HomeFragment extends BaseFragment implements HomeView,
     private PackageManager pm;
     private APPAdapter appAdapter;
     private HomePresenter presenter;
+    private List<String> permissionsList = new ArrayList<>();
+    private static final String[] permissions =
+            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+
 
     @Override
     protected void initPresenter() {
@@ -80,14 +82,9 @@ public class HomeFragment extends BaseFragment implements HomeView,
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        HomeFragmentPermissionsDispatcher.loadWithCheck(this);
-    }
-
-    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    public void load() {
-        presenter.load();
+    public void onStart() {
+        super.onStart();
+        checkPermissions();
     }
 
     @Override
@@ -96,18 +93,41 @@ public class HomeFragment extends BaseFragment implements HomeView,
         presenter.detachView();
     }
 
-    @OnPermissionDenied({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    public void toEnd() {
-        getActivity().finish();
+    public void checkPermissions() {
+        permissionsList.clear();
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(App.getContext(), permissions[i])
+                    != PackageManager.PERMISSION_GRANTED) {
+                permissionsList.add(permissions[i]);
+            }
+        }
+        if (permissionsList.isEmpty()) {
+            presenter.load();
+        } else {
+            String[] permissionToCheck = permissionsList.toArray(new String[permissionsList.size()]);
+            HomeFragment.this.requestPermissions(permissionToCheck, 1);
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        HomeFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        switch (requestCode) {
+            case 1:
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        getActivity().finish();
+                        return;
+                    }
+                }
+                presenter.load();
+                break;
+            default:
+                break;
+        }
     }
 
-//    @Override
+    //    @Override
 //    public void onTitleClick(int id) {
 //        presenter.startCopy(id, dataList, getContext());
 //    }
