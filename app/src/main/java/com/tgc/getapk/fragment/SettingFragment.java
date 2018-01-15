@@ -14,16 +14,19 @@ import com.tgc.getapk.common.utils.DialogUtils;
 import com.tgc.getapk.common.utils.Utils;
 import com.tgc.getapk.mvp.view.SettingsView;
 
+import butterknife.BindView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingFragment extends BaseFragment implements SettingsView,
         AdapterView.OnItemClickListener {
 
-    Toolbar toolbar;
-    ListView lvSetting;
-
     public static final String TAG = "SettingFragment";
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.lv_setting)
+    ListView lvSetting;
 
     @Override
     protected int getLayout() {
@@ -37,8 +40,6 @@ public class SettingFragment extends BaseFragment implements SettingsView,
 
     @Override
     protected void setupView() {
-        toolbar = (Toolbar) getRootView().findViewById(R.id.toolbar);
-        lvSetting = (ListView) getRootView().findViewById(R.id.lv_setting);
         setupToolbar(R.string.setting, toolbar, 0);
         toolbar.getMenu().clear();
     }

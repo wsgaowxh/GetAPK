@@ -21,19 +21,26 @@ import com.tgc.getapk.common.utils.Utils;
 import java.io.File;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DirFragment extends BaseFragment {
 
     public static final String TAG = "DirFragment";
-    private Toolbar toolbar;
-    private RecyclerView dirRecycler;
-    private Button okBtn;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.path_tv)
+    TextView pathTv;
+    @BindView(R.id.dir_lv)
+    RecyclerView dirLv;
+    @BindView(R.id.up_btn)
+    Button upBtn;
+    @BindView(R.id.select_btn)
+    Button selectBtn;
 
     private static final String ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
-    private TextView pathTv;
-    private Button upBtn;
     String currentPath = ROOT_PATH;
     private List<File> fileList;
 
@@ -48,8 +55,8 @@ public class DirFragment extends BaseFragment {
         final DirAdapter dirAdapter = new DirAdapter(fileList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(App.getContext(),
                 LinearLayoutManager.VERTICAL, false);
-        dirRecycler.setAdapter(dirAdapter);
-        dirRecycler.setLayoutManager(layoutManager);
+        dirLv.setAdapter(dirAdapter);
+        dirLv.setLayoutManager(layoutManager);
         dirAdapter.setOnItemClickListener(new DirAdapter.OnItemClickListener() {
             @Override
             public void click(int position) {
@@ -58,7 +65,7 @@ public class DirFragment extends BaseFragment {
                     fileList = Utils.getFileListByPath(currentPath);
                     dirAdapter.updateFilePath(fileList);
                     if (dirAdapter.getItemCount() > 0) {
-                        dirRecycler.scrollToPosition(0);
+                        dirLv.scrollToPosition(0);
                     }
                     pathTv.setText(currentPath);
                 }
@@ -73,13 +80,13 @@ public class DirFragment extends BaseFragment {
                     fileList = Utils.getFileListByPath(currentPath);
                     dirAdapter.updateFilePath(fileList);
                     if (dirAdapter.getItemCount() > 0) {
-                        dirRecycler.scrollToPosition(0);
+                        dirLv.scrollToPosition(0);
                     }
                     pathTv.setText(currentPath);
                 }
             }
         });
-        okBtn.setOnClickListener(new View.OnClickListener() {
+        selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PreferencesHelper.setPath(currentPath);
@@ -91,11 +98,6 @@ public class DirFragment extends BaseFragment {
 
     @Override
     protected void setupView() {
-        toolbar = (Toolbar) getRootView().findViewById(R.id.toolbar);
-        dirRecycler = (RecyclerView) getRootView().findViewById(R.id.dir_lv);
-        okBtn = (Button) getRootView().findViewById(R.id.select_btn);
-        pathTv = (TextView) getRootView().findViewById(R.id.path_tv);
-        upBtn = (Button) getRootView().findViewById(R.id.up_btn);
         setupToolbar(R.string.select_dir, toolbar, 0);
         toolbar.getMenu().clear();
         pathTv.setText(ROOT_PATH);
