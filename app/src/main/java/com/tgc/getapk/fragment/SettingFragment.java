@@ -23,17 +23,13 @@ import com.tgc.getapk.mvp.view.SettingsView;
 
 import java.io.File;
 
-import butterknife.BindView;
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SettingFragment extends BaseFragment implements SettingsView,
         AdapterView.OnItemClickListener {
 
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.lv_setting)
     ListView lvSetting;
 
     public static final String TAG = "SettingFragment";
@@ -50,6 +46,8 @@ public class SettingFragment extends BaseFragment implements SettingsView,
 
     @Override
     protected void setupView() {
+        toolbar = (Toolbar) getRootView().findViewById(R.id.toolbar);
+        lvSetting = (ListView) getRootView().findViewById(R.id.lv_setting);
         setupToolbar(R.string.setting, toolbar, 0);
         toolbar.getMenu().clear();
     }

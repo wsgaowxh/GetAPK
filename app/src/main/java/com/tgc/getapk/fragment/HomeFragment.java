@@ -27,8 +27,6 @@ import com.tgc.getapk.mvp.view.HomeView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -37,14 +35,10 @@ public class HomeFragment extends BaseFragment implements HomeView,
         Toolbar.OnMenuItemClickListener {
     public static final String TAG = "HomeFragment";
 
-    @BindView(R.id.main_rv)
-    RecyclerView recyclerView;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.path_tv)
-    TextView pathTv;
-    @BindView(R.id.loading_pb)
-    ProgressBar loadingPb;
+    private RecyclerView recyclerView;
+    private Toolbar toolbar;
+    private TextView pathTv;
+    private ProgressBar loadingPb;
 
     private List<ResolveInfo> dataList;
     private PackageManager pm;
@@ -75,6 +69,10 @@ public class HomeFragment extends BaseFragment implements HomeView,
 
     @Override
     protected void setupView() {
+        recyclerView = (RecyclerView) getRootView().findViewById(R.id.main_rv);
+        toolbar = (Toolbar) getRootView().findViewById(R.id.toolbar);
+        pathTv = (TextView) getRootView().findViewById(R.id.path_tv);
+        loadingPb = (ProgressBar) getRootView().findViewById(R.id.loading_pb);
         setupToolbar(R.string.app_name, toolbar, 0);
         toolbar.getMenu().clear();
         setHasOptionsMenu(true);
