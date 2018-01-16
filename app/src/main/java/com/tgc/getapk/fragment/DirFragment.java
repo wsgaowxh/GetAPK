@@ -40,7 +40,8 @@ public class DirFragment extends BaseFragment {
     @BindView(R.id.select_btn)
     Button selectBtn;
 
-    private static final String ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath();
+    private static final String ROOT_PATH = Environment.
+            getExternalStorageDirectory().getAbsolutePath() + File.separator;
     String currentPath = ROOT_PATH;
     private List<File> fileList;
 
@@ -61,7 +62,7 @@ public class DirFragment extends BaseFragment {
             @Override
             public void click(int position) {
                 if (fileList.get(position).isDirectory()) {
-                    currentPath = fileList.get(position).getAbsolutePath();
+                    currentPath = fileList.get(position).getAbsolutePath() + File.separator;
                     fileList = Utils.getFileListByPath(currentPath);
                     dirAdapter.updateFilePath(fileList);
                     if (dirAdapter.getItemCount() > 0) {
@@ -76,7 +77,7 @@ public class DirFragment extends BaseFragment {
             public void onClick(View v) {
                 if (currentPath.length() > ROOT_PATH.length()) {
                     File file = new File(currentPath);
-                    currentPath = file.getParent();
+                    currentPath = file.getParent() + File.separator;
                     fileList = Utils.getFileListByPath(currentPath);
                     dirAdapter.updateFilePath(fileList);
                     if (dirAdapter.getItemCount() > 0) {
