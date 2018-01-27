@@ -134,14 +134,18 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     @Override
     public void load(List<ResolveInfo> dataList) {
         this.dataList = dataList;
-        loadingPb.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
-        appAdapter = new APPAdapter(App.getContext(), dataList, pm);
+        if (loadingPb != null) {
+            loadingPb.setVisibility(View.GONE);
+        }
+        if (recyclerView != null) {
+            recyclerView.setVisibility(View.VISIBLE);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
+            appAdapter = new APPAdapter(App.getContext(), dataList, pm);
 //        appAdapter.setOnTitleClickListener(this);
-        recyclerView.setAdapter(appAdapter);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
+            recyclerView.setAdapter(appAdapter);
+            recyclerView.setLayoutManager(linearLayoutManager);
+            pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
+        }
     }
 
     @Override
