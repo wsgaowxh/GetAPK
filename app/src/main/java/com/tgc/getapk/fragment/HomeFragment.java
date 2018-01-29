@@ -8,11 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -101,7 +99,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
             }
         }
         if (permissionsList.isEmpty()) {
-            presenter.load();
+//            presenter.load();
         } else {
             String[] permissionToCheck = permissionsList.toArray(new String[permissionsList.size()]);
             HomeFragment.this.requestPermissions(permissionToCheck, 1);
@@ -119,7 +117,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
                         return;
                     }
                 }
-                presenter.load();
+//                presenter.load();
                 break;
             default:
                 break;
@@ -134,29 +132,22 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     @Override
     public void load(List<ResolveInfo> dataList) {
         this.dataList = dataList;
-        if (loadingPb != null) {
-            loadingPb.setVisibility(View.GONE);
-        }
-        if (recyclerView != null) {
-            recyclerView.setVisibility(View.VISIBLE);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
-            appAdapter = new APPAdapter(App.getContext(), dataList, pm);
-//        appAdapter.setOnTitleClickListener(this);
-            recyclerView.setAdapter(appAdapter);
-            recyclerView.setLayoutManager(linearLayoutManager);
-            pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
-        }
+//        if (loadingPb != null) {
+//            loadingPb.setVisibility(View.GONE);
+//        }
+//        if (recyclerView != null) {
+//            recyclerView.setVisibility(View.VISIBLE);
+//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
+//            appAdapter = new APPAdapter(App.getContext(), dataList, pm);
+//            recyclerView.setAdapter(appAdapter);
+//            recyclerView.setLayoutManager(linearLayoutManager);
+//        }
+        pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.menu_setting:
-//                break;
-//            case R.id.menu_share:
-//                break;
-//            case R.id.menu_about:
-//                break;
             case R.id.menu_pick:
                 if (appAdapter == null) {
                     Snackbar.make(getRootView(), R.string.wait, Snackbar.LENGTH_LONG).show();
