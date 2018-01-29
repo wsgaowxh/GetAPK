@@ -43,6 +43,7 @@ public class NonSysAppFragment extends BaseFragment implements NonSysAppView {
     @Override
     protected void init() {
         pm = App.getContext().getPackageManager();
+        presenter.load();
     }
 
     @Override
@@ -69,5 +70,13 @@ public class NonSysAppFragment extends BaseFragment implements NonSysAppView {
             recyclerView.setAdapter(appAdapter);
             recyclerView.setLayoutManager(linearLayoutManager);
         }
+    }
+
+    public APPAdapter getAdapter() {
+        return appAdapter;
+    }
+
+    public List<ResolveInfo> getDataList() {
+        return dataList;
     }
 }

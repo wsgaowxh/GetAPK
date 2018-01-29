@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class NonSysAppPresenter extends BasePresenter {
     NonSysAppView iView;
 
-    public void load(int type) {
+    public void load() {
         Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -34,7 +34,7 @@ public class NonSysAppPresenter extends BasePresenter {
                 }
             }
         };
-        LoadAsyncTask loadAsyncTask = new LoadAsyncTask(handler, type);
+        LoadAsyncTask loadAsyncTask = new LoadAsyncTask(handler, C.NON_SYS_APP);
         loadAsyncTask.execute();
     }
 

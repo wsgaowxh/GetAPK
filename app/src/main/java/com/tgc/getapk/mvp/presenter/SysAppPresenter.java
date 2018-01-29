@@ -25,7 +25,7 @@ public class SysAppPresenter extends BasePresenter {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if (msg.what == C.NON_SYS_MSG) {
+                if (msg.what == C.SYS_MSG) {
                     Bundle data = msg.getData();
                     ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SYS_BUNDLE);
                     if (dataList != null) {

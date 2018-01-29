@@ -24,4 +24,6 @@
     <string name="directory">Directory</string>
     <string name="select_dir">Select Directory</string>
     <string name="upper">Previous level</string>
+    <string name="sys_app">System App</string>
+    <string name="non_sys_app">Non-System App</string>
 </resources>

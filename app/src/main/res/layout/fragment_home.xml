@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context="com.tgc.getapk.fragment.HomeFragment">
 
@@ -14,11 +15,23 @@
 
     </LinearLayout>
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/main_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@id/bar_ll"
+        app:tabBackground="@color/white"
+        app:tabIndicatorColor="@color/appbar_bkg"
+        app:tabTextColor="@color/color_242424"
+        app:tabSelectedTextColor="@color/appbar_bkg">
+
+    </android.support.design.widget.TabLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/bar_ll"
+        android:layout_below="@id/main_tabs"
         android:layout_above="@id/path_tv">
 
     </android.support.v4.view.ViewPager>

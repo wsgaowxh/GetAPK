@@ -24,4 +24,6 @@
     <string name="directory">目录</string>
     <string name="select_dir">选择目录</string>
     <string name="upper">上一级</string>
+    <string name="sys_app">系统App</string>
+    <string name="non_sys_app">非系统App</string>
 </resources>
