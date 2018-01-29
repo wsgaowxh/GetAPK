@@ -5,7 +5,7 @@
     <string name="ok">OK</string>
     <string name="tishi">Tips</string>
     <string name="success">File backup successful! Save in %1$s,
-        If there is a file with the same name, the file will not be backed up</string>
+        If there is a file with the same name, the file will be covered</string>
     <string name="failed">File backup failed!</string>
     <string name="is_has">The file already exists,It in SD card or internal storage root in the MyBackAPK folder</string>
     <string name="tiquzhong">In the extraction……</string>

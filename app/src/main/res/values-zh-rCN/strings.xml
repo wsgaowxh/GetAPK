@@ -5,7 +5,7 @@
     <string name="dev">Technology GC</string>
     <string name="ok">确定</string>
     <string name="tishi">提示</string>
-    <string name="success">文件备份成功！存放在%1$s文件夹中，若已存在同名文件则该文件不会备份</string>
+    <string name="success">文件备份成功！存放在%1$s文件夹中，若已存在同名文件则该文件会被覆盖</string>
     <string name="failed">文件备份失败！</string>
     <string name="is_has">文件已经存在，它在 SD卡或内部存储根目录的MyBackAPK文件夹中</string>
     <string name="tiquzhong">提取中……</string>
