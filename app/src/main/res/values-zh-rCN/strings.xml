@@ -26,4 +26,5 @@
     <string name="upper">上一级</string>
     <string name="sys_app">系统App</string>
     <string name="non_sys_app">非系统App</string>
+    <string name="tips_666">还有这种操作？程序异常,请重新启动程序</string>
 </resources>

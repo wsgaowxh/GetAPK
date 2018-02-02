@@ -19,6 +19,7 @@ import com.tgc.getapk.adapter.APPAdapter;
 import com.tgc.getapk.adapter.HomeViewPagerAdapter;
 import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BaseResumeFragment;
+import com.tgc.getapk.common.utils.DialogUtils;
 import com.tgc.getapk.common.utils.PreferencesHelper;
 import com.tgc.getapk.mvp.presenter.HomePresenter;
 import com.tgc.getapk.mvp.view.HomeView;
@@ -113,7 +114,6 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
             }
         }
         if (permissionsList.isEmpty()) {
-//            presenter.load();
             load();
         } else {
             String[] permissionToCheck = permissionsList.toArray(new String[permissionsList.size()]);
@@ -126,13 +126,16 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 1:
+                if (grantResults.length == 0) {
+                    DialogUtils.alertFinishNoTitle(getContext(), getString(R.string.tips_666), getActivity());
+                    return;
+                }
                 for (int i = 0; i < grantResults.length; i++) {
                     if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                         getActivity().finish();
                         return;
                     }
                 }
-//                presenter.load();
                 load();
                 break;
             default:

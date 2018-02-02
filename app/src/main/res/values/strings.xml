@@ -26,4 +26,5 @@
     <string name="upper">Previous level</string>
     <string name="sys_app">System App</string>
     <string name="non_sys_app">Non-System App</string>
+    <string name="tips_666">There is such an operation? The program is abnormal, Please restart the program</string>
 </resources>
