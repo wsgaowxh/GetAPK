@@ -143,7 +143,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     public void load() {
         initViewPager();
         HomeViewPagerAdapter pagerAdapter =
-                new HomeViewPagerAdapter(getActivity().getSupportFragmentManager(), titles, views);
+                new HomeViewPagerAdapter(getChildFragmentManager(), titles, views);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
