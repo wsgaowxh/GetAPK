@@ -54,8 +54,8 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private List<String> titles = new ArrayList<>();
     private List<Fragment> views = new ArrayList<>();
-    private NonSysAppFragment nonSysAppFragment;
-    private SysAppFragment sysAppFragment;
+    private NonSysAppFragment nonSysAppFragment= new NonSysAppFragment();
+    private SysAppFragment sysAppFragment = new SysAppFragment();
     private static int currentPage = 0;
 
     @Override
@@ -101,6 +101,11 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         super.onStop();
         titles.clear();
         views.clear();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
         nonSysAppFragment = null;
         sysAppFragment = null;
     }
@@ -183,8 +188,6 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         views.clear();
         titles.add(getString(R.string.non_sys_app));
         titles.add(getString(R.string.sys_app));
-        nonSysAppFragment = new NonSysAppFragment();
-        sysAppFragment = new SysAppFragment();
         views.add(nonSysAppFragment);
         views.add(sysAppFragment);
     }
