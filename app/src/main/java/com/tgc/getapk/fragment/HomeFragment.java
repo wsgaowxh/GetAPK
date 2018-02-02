@@ -87,6 +87,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     @Override
     public void onStart() {
         super.onStart();
+        currentPage = 0;
         checkPermissions();
     }
 
