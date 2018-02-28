@@ -211,9 +211,17 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
                 presenter.startCopyWithList(checkList, dataList, getContext());
                 break;
             case R.id.menu_all:
+                if (appAdapter == null) {
+                    Snackbar.make(getRootView(), R.string.wait, Snackbar.LENGTH_LONG).show();
+                    break;
+                }
                 appAdapter.selectAll();
                 break;
             case R.id.menu_anti_all:
+                if (appAdapter == null) {
+                    Snackbar.make(getRootView(), R.string.wait, Snackbar.LENGTH_LONG).show();
+                    break;
+                }
                 appAdapter.antiSelectAll();
                 break;
             case R.id.menu_setting:
