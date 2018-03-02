@@ -16,7 +16,7 @@ import java.util.List;
 
 public class HomePresenter extends BasePresenter {
 
-    HomeView iView;
+    private HomeView iView;
 
     public void startCopyWithList(List<Integer> appID, List<ResolveInfo> dataList, Context context) {
         CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, appID, dataList);

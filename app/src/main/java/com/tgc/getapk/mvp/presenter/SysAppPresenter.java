@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BasePresenter;
 import com.tgc.getapk.base.BaseView;
 import com.tgc.getapk.common.C;
-import com.tgc.getapk.common.asynctask.LoadAsyncTask;
+import com.tgc.getapk.common.utils.InitAPP;
 import com.tgc.getapk.mvp.view.SysAppView;
 
 import java.util.ArrayList;
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  */
 
 public class SysAppPresenter extends BasePresenter {
-    SysAppView iView;
+    private SysAppView iView;
 
     public void load() {
-        Handler handler = new Handler() {
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -34,8 +35,24 @@ public class SysAppPresenter extends BasePresenter {
                 }
             }
         };
-        LoadAsyncTask loadAsyncTask = new LoadAsyncTask(handler, C.SYS_APP);
-        loadAsyncTask.execute();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                ArrayList<ResolveInfo> resolveInfos = InitAPP
+                        .initSysApp(App.getContext().getPackageManager());
+                postBundle(resolveInfos, handler);
+            }
+        }.start();
+    }
+
+    private void postBundle(ArrayList<ResolveInfo> resolveInfos, Handler handler) {
+        Message messageSys = Message.obtain();
+        messageSys.what = C.SYS_MSG;
+        Bundle bundleSys = new Bundle();
+        bundleSys.putParcelableArrayList(C.SYS_BUNDLE, resolveInfos);
+        messageSys.setData(bundleSys);
+        handler.sendMessage(messageSys);
     }
 
     @Override

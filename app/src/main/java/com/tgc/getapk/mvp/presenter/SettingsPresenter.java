@@ -9,7 +9,7 @@ import com.tgc.getapk.mvp.view.SettingsView;
  */
 
 public class SettingsPresenter extends BasePresenter {
-    SettingsView iView;
+    private SettingsView iView;
 
     @Override
     public void attachView(BaseView view) {

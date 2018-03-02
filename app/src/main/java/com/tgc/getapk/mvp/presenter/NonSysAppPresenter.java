@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BasePresenter;
 import com.tgc.getapk.base.BaseView;
 import com.tgc.getapk.common.C;
-import com.tgc.getapk.common.asynctask.LoadAsyncTask;
+import com.tgc.getapk.common.utils.InitAPP;
 import com.tgc.getapk.mvp.view.NonSysAppView;
 
 import java.util.ArrayList;
@@ -18,10 +19,10 @@ import java.util.ArrayList;
  */
 
 public class NonSysAppPresenter extends BasePresenter {
-    NonSysAppView iView;
+    private NonSysAppView iView;
 
     public void load() {
-        Handler handler = new Handler() {
+        final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -34,8 +35,24 @@ public class NonSysAppPresenter extends BasePresenter {
                 }
             }
         };
-        LoadAsyncTask loadAsyncTask = new LoadAsyncTask(handler, C.NON_SYS_APP);
-        loadAsyncTask.execute();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                ArrayList<ResolveInfo> resolveInfos = InitAPP
+                        .initNonSysApp(App.getContext().getPackageManager());
+                postBundle(resolveInfos, handler);
+            }
+        }.start();
+    }
+
+    private void postBundle(ArrayList<ResolveInfo> resolveInfos, Handler handler) {
+        Message messageNonSys = Message.obtain();
+        messageNonSys.what = C.NON_SYS_MSG;
+        Bundle bundleNonSys = new Bundle();
+        bundleNonSys.putParcelableArrayList(C.NON_SYS_BUNDLE, resolveInfos);
+        messageNonSys.setData(bundleNonSys);
+        handler.sendMessage(messageNonSys);
     }
 
     @Override
