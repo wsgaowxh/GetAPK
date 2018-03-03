@@ -2,6 +2,7 @@
 <resources>
     <string-array name="settings_arr">
         <item>备份路径</item>
+        <item>文件名格式</item>
         <item>关于</item>
     </string-array>
 </resources>

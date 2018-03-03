@@ -56,6 +56,9 @@ public class SettingFragment extends BaseFragment implements SettingsView,
                 addFragment(new DirFragment(), DirFragment.TAG, true);
                 break;
             case 1:
+                DialogUtils.selectFileNameMode(getContext());
+                break;
+            case 2:
                 String version = Utils.getVersion();
                 if (version == null) {
                     Snackbar.make(getRootView(), R.string.about_app, Snackbar.LENGTH_SHORT).show();

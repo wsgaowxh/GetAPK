@@ -21,4 +21,12 @@ public class PreferencesHelper {
     public static String getPath() {
         return SPUtils.getString(C.PATH, defaultPath);
     }
+
+    public static void setFileNameMode(int mode) {
+        SPUtils.putInt(C.FILE_NAME_MODE, mode);
+    }
+
+    public static int getFileNameMode() {
+        return SPUtils.getInt(C.FILE_NAME_MODE, C.NAME_CODE_NAME);
+    }
 }

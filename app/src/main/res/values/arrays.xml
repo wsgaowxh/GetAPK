@@ -2,6 +2,7 @@
 <resources>
     <string-array name="settings_arr">
         <item>Backup path</item>
+        <item>File name format</item>
         <item>About</item>
     </string-array>
 </resources>

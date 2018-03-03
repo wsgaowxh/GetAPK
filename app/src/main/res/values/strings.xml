@@ -27,4 +27,8 @@
     <string name="sys_app">System App</string>
     <string name="non_sys_app">Non-System App</string>
     <string name="tips_666">There is such an operation? The program is abnormal, Please restart the program</string>
+    <string name="mode_1">APP name + version number</string>
+    <string name="mode_2">APP name + version number + package name + build number</string>
+    <string name="mode_3">package name</string>
+    <string name="select_mode">Select the file name format</string>
 </resources>

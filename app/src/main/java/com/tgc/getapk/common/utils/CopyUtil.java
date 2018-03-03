@@ -1,9 +1,12 @@
 package com.tgc.getapk.common.utils;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.tgc.getapk.base.App;
+import com.tgc.getapk.common.C;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,22 +25,43 @@ public class CopyUtil {
         int resultCode = 0;
         //存放位置
         String newFile = PreferencesHelper.getPath();
+        int nameMode = PreferencesHelper.getFileNameMode();
         String oldFile;
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
             for (int i = 0; i < appID.size(); i++) {
                 String packageName = GetAppInfoUtil.getPkgName(appID.get(i), dataList);
+                PackageInfo packageInfo = App.getContext().getPackageManager().getPackageInfo(packageName, 0);
+                ApplicationInfo appInfo = App.getContext().getPackageManager().getApplicationInfo(
+                        packageName, 0);
                 //原始位置
-                oldFile = App.getContext().getPackageManager().getApplicationInfo(
-                        packageName, 0).sourceDir;
+                oldFile = appInfo.sourceDir;
 
                 File in = new File(oldFile);
                 File file = new File(newFile);
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-                String filePath = newFile + packageName + ".apk";
+                String filePath;
+                switch (nameMode) {
+                    case C.NAME_CODE_NAME:
+                        filePath = newFile + GetAppInfoUtil.getAppName(appID.get(i), dataList) + "-"
+                                + packageInfo.versionName + ".apk";
+                        break;
+                    case C.NAME_CODE_PKG_IN_NAME:
+                        filePath = newFile + GetAppInfoUtil.getAppName(appID.get(i), dataList) + "-"
+                                + packageInfo.versionName + "-" + packageName + "-"
+                                + packageInfo.versionCode + ".apk";
+                        break;
+                    case C.PKG_NAME:
+                        filePath = newFile + packageName + ".apk";
+                        break;
+                    default:
+                        filePath = newFile + packageName + ".apk";
+                        break;
+                }
+
                 File out = new File(filePath);
                 boolean isCreat = out.exists();
                 //情况1：isCreat=false，isOK有值
