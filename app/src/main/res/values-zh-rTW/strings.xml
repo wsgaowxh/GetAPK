@@ -27,8 +27,9 @@
     <string name="sys_app">系統App</string>
     <string name="non_sys_app">非系統App</string>
     <string name="tips_666">還有這種操作？程序異常,請重新啟動程序</string>
-    <string name="mode_1">APP名稱+版本號</string>
-    <string name="mode_2">APP名稱+版本號+包名+內部版本號</string>
-    <string name="mode_3">包名</string>
+    <string name="mode_name">APP名稱</string>
+    <string name="mode_version_code">版本號</string>
+    <string name="mode_pkg_name">包名</string>
+    <string name="mode_in_code">內部版本號</string>
     <string name="select_mode">選擇檔名格式</string>
 </resources>

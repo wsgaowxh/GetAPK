@@ -35,4 +35,16 @@ public class SPUtils {
                 .getSharedPreferences(currentTable, Context.MODE_PRIVATE);
         return preferences.getInt(key, defaultValue);
     }
+
+    public static void putBoolean(String key, boolean value) {
+        SharedPreferences preferences = App.getInstance()
+                .getSharedPreferences(currentTable, Context.MODE_PRIVATE);
+        preferences.edit().putBoolean(key, value).apply();
+    }
+
+    public static boolean getBoolean(String key, boolean defaultValue) {
+        SharedPreferences preferences = App.getInstance()
+                .getSharedPreferences(currentTable, Context.MODE_PRIVATE);
+        return preferences.getBoolean(key, defaultValue);
+    }
 }

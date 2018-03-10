@@ -49,4 +49,40 @@ public class Utils {
         Collections.sort(result, new FileComparator());
         return result;
     }
+
+    public static void saveNameMode(int which, boolean value) {
+        // 匹配到which即进行对应存储
+        switch (which) {
+            case 0: // Name
+                PreferencesHelper.setNameMode(value);
+                break;
+            case 1: // Code
+                PreferencesHelper.setCodeMode(value);
+                break;
+            case 2: // Pkg
+                PreferencesHelper.setPkgMode(value);
+                break;
+            case 3: // In Code
+                PreferencesHelper.setInCodeMode(value);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static boolean getNameMode(int which) {
+        // 匹配到which即进行对应返回
+        switch (which) {
+            case 0: // Name
+                return PreferencesHelper.getNameMode();
+            case 1: // Code
+                return PreferencesHelper.getCodeMode();
+            case 2: // Pkg
+                return PreferencesHelper.getPkgMode();
+            case 3: // In Code
+                return PreferencesHelper.getInCodeMode();
+            default:
+                return false;
+        }
+    }
 }

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.tgc.getapk.base.App;
-import com.tgc.getapk.common.C;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +24,10 @@ public class CopyUtil {
         int resultCode = 0;
         //存放位置
         String newFile = PreferencesHelper.getPath();
-        int nameMode = PreferencesHelper.getFileNameMode();
+        boolean nameMode = PreferencesHelper.getNameMode();
+        boolean codeMode = PreferencesHelper.getCodeMode();
+        boolean pkgMode = PreferencesHelper.getPkgMode();
+        boolean inCodeMode = PreferencesHelper.getInCodeMode();
         String oldFile;
         FileInputStream fis = null;
         FileOutputStream fos = null;
@@ -43,24 +45,22 @@ public class CopyUtil {
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-                String filePath;
-                switch (nameMode) {
-                    case C.NAME_CODE_NAME:
-                        filePath = newFile + GetAppInfoUtil.getAppName(appID.get(i), dataList) + "-"
-                                + packageInfo.versionName + ".apk";
-                        break;
-                    case C.NAME_CODE_PKG_IN_NAME:
-                        filePath = newFile + GetAppInfoUtil.getAppName(appID.get(i), dataList) + "-"
-                                + packageInfo.versionName + "-" + packageName + "-"
-                                + packageInfo.versionCode + ".apk";
-                        break;
-                    case C.PKG_NAME:
-                        filePath = newFile + packageName + ".apk";
-                        break;
-                    default:
-                        filePath = newFile + packageName + ".apk";
-                        break;
+
+                String filePath = newFile;
+                if (nameMode) {
+                    filePath = filePath + GetAppInfoUtil.getAppName(appID.get(i), dataList) + "-";
                 }
+                if (codeMode) {
+                    filePath = filePath + packageInfo.versionName + "-";
+                }
+                if (pkgMode) {
+                    filePath = filePath + packageName + "-";
+                }
+                if (inCodeMode) {
+                    filePath = filePath + packageInfo.versionCode + "-";
+                }
+                //DialogUtils中做了限制，上方四个if至少会执行其中一个
+                filePath = filePath.substring(0, filePath.length() - 1) + ".apk";
 
                 File out = new File(filePath);
                 boolean isCreat = out.exists();

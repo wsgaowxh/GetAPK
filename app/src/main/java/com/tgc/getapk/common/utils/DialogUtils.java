@@ -8,16 +8,12 @@ import android.support.v7.app.AlertDialog;
 
 import com.tgc.getapk.R;
 import com.tgc.getapk.base.App;
-import com.tgc.getapk.common.C;
 
 /**
  * Created by TGC on 2017/4/16.
  */
 
 public class DialogUtils {
-    private static String[] fileNameModeItems = new String[]{App.getContext().getString(R.string.mode_1),
-            App.getContext().getString(R.string.mode_2),
-            App.getContext().getString(R.string.mode_3)};
 
     public static void alert(Context context, @StringRes int title, @StringRes int msg) {
         String s = App.getAppResources().getString(msg);
@@ -55,30 +51,41 @@ public class DialogUtils {
     }
 
     public static void selectFileNameMode(Context context) {
-        int fileNameMode = PreferencesHelper.getFileNameMode();
+        String[] items = new String[]{context.getString(R.string.mode_name),
+                context.getString(R.string.mode_version_code),
+                context.getString(R.string.mode_pkg_name),
+                context.getString(R.string.mode_in_code)};
+        final boolean[] itemsStatus = new boolean[items.length];
+        for (int i = 0; i < items.length; i++) {
+            itemsStatus[i] = Utils.getNameMode(i);
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.select_mode);
-        builder.setSingleChoiceItems(fileNameModeItems, fileNameMode - 1, new DialogInterface.OnClickListener() {
+        builder.setMultiChoiceItems(items, itemsStatus, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                itemsStatus[which] = isChecked;
+            }
+        });
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        PreferencesHelper.setFileNameMode(C.NAME_CODE_NAME);
-                        break;
-                    case 1:
-                        PreferencesHelper.setFileNameMode(C.NAME_CODE_PKG_IN_NAME);
-                        break;
-                    case 2:
-                        PreferencesHelper.setFileNameMode(C.PKG_NAME);
-                        break;
-                    default:
-                        PreferencesHelper.setFileNameMode(C.PKG_NAME);
-                        break;
+                int j = 0;
+                for (int i = 0; i < itemsStatus.length; i++) {
+                    if (itemsStatus[i]) {
+                        Utils.saveNameMode(i, true);
+                    } else {
+                        Utils.saveNameMode(i, false);
+                        j++;
+                    }
+                }
+                if (j >= itemsStatus.length) {
+                    Utils.saveNameMode(0,true);
+                    Utils.saveNameMode(1, true);
                 }
                 dialog.dismiss();
             }
         });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        builder.create().show();
     }
 }
