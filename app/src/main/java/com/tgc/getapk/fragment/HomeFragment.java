@@ -2,6 +2,7 @@ package com.tgc.getapk.fragment;
 
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
@@ -25,7 +26,6 @@ import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BaseResumeFragment;
 import com.tgc.getapk.common.utils.DialogUtils;
 import com.tgc.getapk.common.utils.PreferencesHelper;
-import com.tgc.getapk.common.utils.Utils;
 import com.tgc.getapk.mvp.presenter.HomePresenter;
 import com.tgc.getapk.mvp.view.HomeView;
 
@@ -65,6 +65,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     private NonSysAppFragment nonSysAppFragment = new NonSysAppFragment();
     private SysAppFragment sysAppFragment = new SysAppFragment();
     private static int currentPage = 0;
+    private ProgressDialog dialogInSearch;
 
     @Override
     protected void initPresenter() {
@@ -107,9 +108,8 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                ArrayList<ResolveInfo> searchAppList = Utils
-                        .getSearchAppList(App.getInstance().getPackageManager(), query);
-                appSearchAdapter.setData(searchAppList);
+                dialogInSearch = DialogUtils.alertHasReturn(getContext());
+                presenter.getSearchAppList(query);
                 return false;
             }
 
@@ -322,5 +322,11 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     @Override
     protected void onFragmentResume() {
         pathTv.setText(getResources().getString(R.string.back_path) + " " + PreferencesHelper.getPath());
+    }
+
+    @Override
+    public void load(ArrayList<ResolveInfo> dataList) {
+        appSearchAdapter.setData(dataList);
+        dialogInSearch.dismiss();
     }
 }

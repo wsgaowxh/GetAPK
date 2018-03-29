@@ -1,6 +1,7 @@
 package com.tgc.getapk.common.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.StringRes;
@@ -33,6 +34,14 @@ public class DialogUtils {
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    public static ProgressDialog alertHasReturn(Context context) {
+        ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        return progressDialog;
     }
 
     public static void alertFinishNoTitle(Context context, String msg, final Activity activity) {
