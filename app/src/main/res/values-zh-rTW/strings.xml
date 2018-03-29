@@ -32,4 +32,5 @@
     <string name="mode_pkg_name">包名</string>
     <string name="mode_in_code">內部版本號</string>
     <string name="select_mode">選擇檔名格式</string>
+    <string name="search">蒐索</string>
 </resources>

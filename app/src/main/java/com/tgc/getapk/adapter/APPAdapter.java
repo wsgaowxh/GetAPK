@@ -45,6 +45,15 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         checkList = new ArrayList<>();
     }
 
+    public void setData(List<ResolveInfo> dataList) {
+        this.dataList = dataList;
+        notifyDataSetChanged();
+    }
+
+    public List<ResolveInfo> getData() {
+        return dataList;
+    }
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         ResolveInfo resolveInfo = dataList.get(position);

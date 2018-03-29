@@ -36,6 +36,16 @@
 
     </android.support.v4.view.ViewPager>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_search_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bar_ll"
+        android:layout_above="@id/path_tv"
+        android:visibility="invisible">
+
+    </android.support.v7.widget.RecyclerView>
+
     <TextView
         android:id="@+id/path_tv"
         android:background="@color/white"

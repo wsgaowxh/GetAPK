@@ -10,8 +10,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.tgc.getapk.R;
@@ -21,6 +25,7 @@ import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BaseResumeFragment;
 import com.tgc.getapk.common.utils.DialogUtils;
 import com.tgc.getapk.common.utils.PreferencesHelper;
+import com.tgc.getapk.common.utils.Utils;
 import com.tgc.getapk.mvp.presenter.HomePresenter;
 import com.tgc.getapk.mvp.view.HomeView;
 
@@ -44,17 +49,20 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     ViewPager viewPager;
     @BindView(R.id.main_tabs)
     TabLayout tabLayout;
+    @BindView(R.id.main_search_rv)
+    RecyclerView mainSearchRv;
 
     private List<ResolveInfo> dataList;
-//    private PackageManager pm;
+    //    private PackageManager pm;
     private APPAdapter appAdapter;
+    private APPAdapter appSearchAdapter;
     private HomePresenter presenter;
     private List<String> permissionsList = new ArrayList<>();
     private static final String[] permissions =
             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private List<String> titles = new ArrayList<>();
     private List<Fragment> views = new ArrayList<>();
-    private NonSysAppFragment nonSysAppFragment= new NonSysAppFragment();
+    private NonSysAppFragment nonSysAppFragment = new NonSysAppFragment();
     private SysAppFragment sysAppFragment = new SysAppFragment();
     private static int currentPage = 0;
 
@@ -82,6 +90,49 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         toolbar.getMenu().clear();
         setHasOptionsMenu(true);
         toolbar.inflateMenu(R.menu.menu_home);
+        SearchView searchView = (SearchView) toolbar.getMenu()
+                .findItem(R.id.menu_search).getActionView();
+        searchView.setSubmitButtonEnabled(true);
+        mainSearchRv.setVisibility(View.INVISIBLE);
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentPage = 2;
+                tabLayout.setVisibility(View.INVISIBLE);
+                viewPager.setVisibility(View.INVISIBLE);
+                mainSearchRv.setVisibility(View.VISIBLE);
+                loadSearch();
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                ArrayList<ResolveInfo> searchAppList = Utils
+                        .getSearchAppList(App.getInstance().getPackageManager(), query);
+                appSearchAdapter.setData(searchAppList);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        toolbar.getMenu().getItem(0).setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                tabLayout.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.VISIBLE);
+                mainSearchRv.setVisibility(View.INVISIBLE);
+                currentPage = viewPager.getCurrentItem();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -109,6 +160,15 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         super.onDestroy();
         nonSysAppFragment = null;
         sysAppFragment = null;
+    }
+
+    private void loadSearch() {
+        ArrayList<ResolveInfo> dataList = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
+        appSearchAdapter = new APPAdapter(App.getContext(), dataList, App.getInstance().getPackageManager());
+        mainSearchRv.setAdapter(appSearchAdapter);
+        mainSearchRv.setLayoutManager(linearLayoutManager);
     }
 
     public void checkPermissions() {
@@ -239,6 +299,8 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
                 return nonSysAppFragment.getAdapter();
             case 1:
                 return sysAppFragment.getAdapter();
+            case 2:
+                return appSearchAdapter;
             default:
                 return nonSysAppFragment.getAdapter();
         }
@@ -250,6 +312,8 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
                 return nonSysAppFragment.getDataList();
             case 1:
                 return sysAppFragment.getDataList();
+            case 2:
+                return appSearchAdapter.getData();
             default:
                 return nonSysAppFragment.getDataList();
         }

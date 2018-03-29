@@ -3,7 +3,9 @@ package com.tgc.getapk.common.utils;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+
 import com.tgc.getapk.base.App;
 
 import java.io.File;
@@ -84,5 +86,21 @@ public class Utils {
             default:
                 return false;
         }
+    }
+
+    public static ArrayList<ResolveInfo> getSearchAppList(PackageManager pm, String keyWord) {
+        //获取应用列表
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        ArrayList<ResolveInfo> appList = (ArrayList<ResolveInfo>) pm.queryIntentActivities(intent, 0);
+        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+
+        ArrayList<ResolveInfo> list = new ArrayList<>();
+        for (int i = 0; i < appList.size(); i++) {
+            if (appList.get(i).loadLabel(pm).toString().contains(keyWord)) {
+                list.add(appList.get(i));
+            }
+        }
+        return list;
     }
 }
