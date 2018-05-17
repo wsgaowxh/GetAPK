@@ -14,6 +14,7 @@ import com.tgc.getapk.common.asynctask.CopyAsyncTask;
 import com.tgc.getapk.common.utils.Utils;
 import com.tgc.getapk.mvp.view.HomeView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,26 +25,47 @@ import java.util.List;
 public class HomePresenter extends BasePresenter {
 
     private HomeView iView;
+    private Handler handler;
 
     public void startCopyWithList(List<Integer> appID, List<ResolveInfo> dataList, Context context) {
         CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, appID, dataList);
         copyAsyncTask.execute();
     }
 
-    public void getSearchAppList(final String keyWord) {
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == C.SEARCH_MSG) {
-                    Bundle data = msg.getData();
-                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SEARCH_BUNDLE);
-                    if (dataList != null) {
-                        iView.load(dataList);
-                    }
+    static class HomeHandler extends Handler {
+        WeakReference<HomeView> weakReferenceView;
+        public HomeHandler(HomeView view) {
+            weakReferenceView = new WeakReference<>(view);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == C.SEARCH_MSG) {
+                Bundle data = msg.getData();
+                ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SEARCH_BUNDLE);
+                if (dataList != null) {
+                    HomeView homeView = weakReferenceView.get();
+                    homeView.load(dataList);
                 }
             }
-        };
+        }
+    }
+
+    public void getSearchAppList(final String keyWord) {
+//        final Handler handler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//                if (msg.what == C.SEARCH_MSG) {
+//                    Bundle data = msg.getData();
+//                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SEARCH_BUNDLE);
+//                    if (dataList != null) {
+//                        iView.load(dataList);
+//                    }
+//                }
+//            }
+//        };
         new Thread() {
             @Override
             public void run() {
@@ -67,6 +89,7 @@ public class HomePresenter extends BasePresenter {
     @Override
     public void attachView(BaseView view) {
         this.iView = (HomeView) view;
+        handler = new HomeHandler(iView);
     }
 
     @Override

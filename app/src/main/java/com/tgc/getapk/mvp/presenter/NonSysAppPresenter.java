@@ -12,6 +12,7 @@ import com.tgc.getapk.common.C;
 import com.tgc.getapk.common.utils.InitAPP;
 import com.tgc.getapk.mvp.view.NonSysAppView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -20,21 +21,42 @@ import java.util.ArrayList;
 
 public class NonSysAppPresenter extends BasePresenter {
     private NonSysAppView iView;
+    private Handler handler;
 
-    public void load() {
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == C.NON_SYS_MSG) {
-                    Bundle data = msg.getData();
-                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.NON_SYS_BUNDLE);
-                    if (dataList != null) {
-                        iView.load(dataList);
-                    }
+    static class NonSysHandler extends Handler {
+        WeakReference<NonSysAppView> weakReference;
+        public NonSysHandler(NonSysAppView view) {
+            weakReference = new WeakReference<>(view);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == C.NON_SYS_MSG) {
+                Bundle data = msg.getData();
+                ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.NON_SYS_BUNDLE);
+                if (dataList != null) {
+                    NonSysAppView nonSysAppView = weakReference.get();
+                    nonSysAppView.load(dataList);
                 }
             }
-        };
+        }
+    }
+
+    public void load() {
+//        final Handler handler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//                if (msg.what == C.NON_SYS_MSG) {
+//                    Bundle data = msg.getData();
+//                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.NON_SYS_BUNDLE);
+//                    if (dataList != null) {
+//                        iView.load(dataList);
+//                    }
+//                }
+//            }
+//        };
         new Thread() {
             @Override
             public void run() {
@@ -58,6 +80,7 @@ public class NonSysAppPresenter extends BasePresenter {
     @Override
     public void attachView(BaseView view) {
         this.iView = (NonSysAppView) view;
+        handler = new NonSysHandler(iView);
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.tgc.getapk.common.C;
 import com.tgc.getapk.common.utils.InitAPP;
 import com.tgc.getapk.mvp.view.SysAppView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -20,21 +21,42 @@ import java.util.ArrayList;
 
 public class SysAppPresenter extends BasePresenter {
     private SysAppView iView;
+    private Handler handler;
 
-    public void load() {
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == C.SYS_MSG) {
-                    Bundle data = msg.getData();
-                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SYS_BUNDLE);
-                    if (dataList != null) {
-                        iView.load(dataList);
-                    }
+    static class SysHandler extends Handler {
+        WeakReference<SysAppView> weakReference;
+        public SysHandler(SysAppView view) {
+            weakReference = new WeakReference<>(view);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == C.SYS_MSG) {
+                Bundle data = msg.getData();
+                ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SYS_BUNDLE);
+                if (dataList != null) {
+                    SysAppView sysAppView = weakReference.get();
+                    sysAppView.load(dataList);
                 }
             }
-        };
+        }
+    }
+
+    public void load() {
+//        final Handler handler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//                if (msg.what == C.SYS_MSG) {
+//                    Bundle data = msg.getData();
+//                    ArrayList<ResolveInfo> dataList = data.getParcelableArrayList(C.SYS_BUNDLE);
+//                    if (dataList != null) {
+//                        iView.load(dataList);
+//                    }
+//                }
+//            }
+//        };
         new Thread() {
             @Override
             public void run() {
@@ -58,6 +80,7 @@ public class SysAppPresenter extends BasePresenter {
     @Override
     public void attachView(BaseView view) {
         this.iView = (SysAppView) view;
+        handler = new SysHandler(iView);
     }
 
     @Override
