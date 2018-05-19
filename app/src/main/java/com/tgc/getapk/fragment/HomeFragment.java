@@ -17,6 +17,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.tgc.getapk.R;
@@ -169,6 +171,9 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         appSearchAdapter = new APPAdapter(App.getContext(), dataList, App.getInstance().getPackageManager());
         mainSearchRv.setAdapter(appSearchAdapter);
         mainSearchRv.setLayoutManager(linearLayoutManager);
+
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(mainSearchRv.getContext(), R.anim.layout_fall_down);
+        mainSearchRv.setLayoutAnimation(animation);
     }
 
     public void checkPermissions() {
@@ -327,6 +332,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     @Override
     public void load(ArrayList<ResolveInfo> dataList) {
         appSearchAdapter.setData(dataList);
+        mainSearchRv.scheduleLayoutAnimation();
         dialogInSearch.dismiss();
     }
 }

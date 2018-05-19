@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -58,6 +60,10 @@ public class DirFragment extends BaseFragment {
                 LinearLayoutManager.VERTICAL, false);
         dirLv.setAdapter(dirAdapter);
         dirLv.setLayoutManager(layoutManager);
+
+        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(dirLv.getContext(), R.anim.layout_fall_down);
+        dirLv.setLayoutAnimation(animation);
+
         dirAdapter.setOnItemClickListener(new DirAdapter.OnItemClickListener() {
             @Override
             public void click(int position) {
@@ -65,6 +71,7 @@ public class DirFragment extends BaseFragment {
                     currentPath = fileList.get(position).getAbsolutePath() + File.separator;
                     fileList = Utils.getFileListByPath(currentPath);
                     dirAdapter.updateFilePath(fileList);
+                    dirLv.scheduleLayoutAnimation(); //使RecyclerView每次更新后播放动画
                     if (dirAdapter.getItemCount() > 0) {
                         dirLv.scrollToPosition(0);
                     }
