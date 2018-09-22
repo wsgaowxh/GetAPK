@@ -6,6 +6,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
+import com.tgc.getapk.common.comparator.ResolveInfoComparator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,7 +22,8 @@ public class InitAPP {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         ArrayList<ResolveInfo> appList = (ArrayList<ResolveInfo>) pm.queryIntentActivities(intent, 0);
-        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+//        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+        Collections.sort(appList, new ResolveInfoComparator());
 
         ArrayList<ResolveInfo> list = new ArrayList<>();
         for (int i = 0; i < appList.size(); i++) {
@@ -42,7 +45,8 @@ public class InitAPP {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         ArrayList<ResolveInfo> appList = (ArrayList<ResolveInfo>) pm.queryIntentActivities(intent, 0);
-        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+//        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+        Collections.sort(appList, new ResolveInfoComparator());
 
         ArrayList<ResolveInfo> list = new ArrayList<>();
         for (int i = 0; i < appList.size(); i++) {
