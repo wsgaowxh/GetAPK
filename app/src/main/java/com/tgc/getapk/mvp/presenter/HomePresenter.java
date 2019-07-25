@@ -11,6 +11,7 @@ import com.tgc.getapk.base.BasePresenter;
 import com.tgc.getapk.base.BaseView;
 import com.tgc.getapk.common.C;
 import com.tgc.getapk.common.asynctask.CopyAsyncTask;
+import com.tgc.getapk.common.utils.PreferencesHelper;
 import com.tgc.getapk.common.utils.Utils;
 import com.tgc.getapk.mvp.view.HomeView;
 
@@ -84,6 +85,12 @@ public class HomePresenter extends BasePresenter {
         bundle.putParcelableArrayList(C.SEARCH_BUNDLE, resolveInfos);
         message.setData(bundle);
         handler.sendMessage(message);
+    }
+
+    public void rule() {
+        if (!PreferencesHelper.getRule()) {
+            iView.showRule();
+        }
     }
 
     @Override

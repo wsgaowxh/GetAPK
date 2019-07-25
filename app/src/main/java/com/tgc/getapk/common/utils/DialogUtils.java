@@ -21,6 +21,27 @@ public class DialogUtils {
         alert(context, title, s);
     }
 
+    public static void rule(Context context, @StringRes int msg, final Activity activity) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(msg);
+        builder.setPositiveButton(context.getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                PreferencesHelper.setRule(true);
+                dialog.cancel();
+            }
+        });
+        builder.setNegativeButton(context.getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                activity.finish();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
     public static void alert(Context context, @StringRes int title, String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);

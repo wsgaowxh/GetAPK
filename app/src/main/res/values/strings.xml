@@ -33,4 +33,6 @@
     <string name="mode_in_code">build number</string>
     <string name="select_mode">Select the file name format</string>
     <string name="search">Search</string>
+    <string name="no">No</string>
+    <string name="rule">Please use this software reasonably. It is strongly recommended to check the integrity of the installation package after backup. Some software may always fail to backup due to system reasons. The author is not responsible for any loss caused by using this software.</string>
 </resources>

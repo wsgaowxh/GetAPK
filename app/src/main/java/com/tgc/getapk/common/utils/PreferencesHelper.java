@@ -53,4 +53,12 @@ public class PreferencesHelper {
     public static void setInCodeMode(boolean value) {
         SPUtils.putBoolean(C.APP_IN_CODE, value);
     }
+
+    public static void setRule(boolean value) {
+        SPUtils.putBoolean(C.RULE, value);
+    }
+
+    public static boolean getRule() {
+        return SPUtils.getBoolean(C.RULE, false);
+    }
 }

@@ -215,6 +215,7 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
     }
 
     public void load() {
+        presenter.rule();
         initViewPager();
         HomeViewPagerAdapter pagerAdapter =
                 new HomeViewPagerAdapter(getChildFragmentManager(), titles, views);
@@ -334,5 +335,10 @@ public class HomeFragment extends BaseResumeFragment implements HomeView,
         appSearchAdapter.setData(dataList);
         mainSearchRv.scheduleLayoutAnimation();
         dialogInSearch.dismiss();
+    }
+
+    @Override
+    public void showRule() {
+        DialogUtils.rule(getContext(), R.string.rule, getActivity());
     }
 }

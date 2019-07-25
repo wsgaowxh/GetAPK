@@ -33,4 +33,6 @@
     <string name="mode_in_code">内部版本号</string>
     <string name="select_mode">选择文件名格式</string>
     <string name="search">搜索</string>
+    <string name="no">不</string>
+    <string name="rule">请合理使用本软件，强烈建议备份后检查安装包是否完整，部分软件因系统原因可能总是会备份失败，对于使用本软件可能造成的任何损失，作者概不负责</string>
 </resources>

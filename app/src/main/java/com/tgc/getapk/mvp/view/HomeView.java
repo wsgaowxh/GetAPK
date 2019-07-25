@@ -12,4 +12,6 @@ import java.util.ArrayList;
 
 public interface HomeView extends BaseView {
     void load(ArrayList<ResolveInfo> dataList);
+
+    void showRule();
 }

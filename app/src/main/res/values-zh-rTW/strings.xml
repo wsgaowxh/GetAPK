@@ -33,4 +33,6 @@
     <string name="mode_in_code">內部版本號</string>
     <string name="select_mode">選擇檔名格式</string>
     <string name="search">蒐索</string>
+    <string name="no">不</string>
+    <string name="rule">請合理使用本軟件，強烈建議備份後檢查安裝包是否完整，部分軟件因系統原因可能總是會備份失敗，對於使用本軟件可能造成的任何損失，作者概不負責</string>
 </resources>

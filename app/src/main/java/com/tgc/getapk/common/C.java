@@ -21,4 +21,7 @@ public class C {
     public static final String APP_CODE = "mode_code_v2";
     public static final String APP_PKG = "mode_pkg_v2";
     public static final String APP_IN_CODE = "mode_in_code_v2";
+
+    // 是否同意使用条款
+    public static final String RULE = "rule";
 }
