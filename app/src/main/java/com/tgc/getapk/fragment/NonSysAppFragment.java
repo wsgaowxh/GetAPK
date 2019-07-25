@@ -67,6 +67,12 @@ public class NonSysAppFragment extends BaseFragment implements NonSysAppView {
             recyclerView.setVisibility(View.VISIBLE);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(App.getContext(), LinearLayoutManager.VERTICAL, false);
             appAdapter = new APPAdapter(App.getContext(), dataList, pm);
+            appAdapter.setOnIconClickListener(new APPAdapter.OnIconClickListener() {
+                @Override
+                public void onIconClick(int appId) {
+                    presenter.startCopy(appId, getDataList(), getContext());
+                }
+            });
             recyclerView.setAdapter(appAdapter);
             recyclerView.setLayoutManager(linearLayoutManager);
         }

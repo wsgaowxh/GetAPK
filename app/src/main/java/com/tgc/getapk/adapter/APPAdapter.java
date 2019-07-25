@@ -35,6 +35,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
 
     private RecyclerView recyclerView;
 //    public OnTitleClickListener mListener;
+    public OnIconClickListener listener;
 
     public APPAdapter(Context context, List<ResolveInfo> dataList, PackageManager pm) {
         this.context = context;
@@ -93,6 +94,7 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
 
 
 //        holder.pick.setOnClickListener(new ClickListener(position));
+        holder.icon.setOnClickListener(new ClickListener(position));
 
     }
 
@@ -139,6 +141,20 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
         notifyDataSetChanged();
     }
 
+    public class ClickListener implements View.OnClickListener {
+        private int id;
+
+        public ClickListener(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (listener != null) {
+                listener.onIconClick(id);
+            }
+        }
+    }
 
 //    public class ClickListener implements View.OnClickListener {
 //        private int id;
@@ -186,6 +202,14 @@ public class APPAdapter extends RecyclerView.Adapter<APPAdapter.MyViewHolder> {
             pick = (CheckBox) itemView.findViewById(R.id.item_pick);
             rl = (RelativeLayout) itemView.findViewById(R.id.item_rl);
         }
+    }
+
+    public void setOnIconClickListener(OnIconClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnIconClickListener {
+        void onIconClick(int appId);
     }
 
 //    public void setOnTitleClickListener(OnTitleClickListener listener) {//自己写了一个方法，用上我们的接口

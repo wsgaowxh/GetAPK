@@ -1,5 +1,6 @@
 package com.tgc.getapk.mvp.presenter;
 
+import android.content.Context;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,11 +10,13 @@ import com.tgc.getapk.base.App;
 import com.tgc.getapk.base.BasePresenter;
 import com.tgc.getapk.base.BaseView;
 import com.tgc.getapk.common.C;
+import com.tgc.getapk.common.asynctask.CopyAsyncTask;
 import com.tgc.getapk.common.utils.InitAPP;
 import com.tgc.getapk.mvp.view.SysAppView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tgc on 2018/1/29.
@@ -41,6 +44,13 @@ public class SysAppPresenter extends BasePresenter {
                 }
             }
         }
+    }
+
+    public void startCopy(int id, List<ResolveInfo> dataList, Context context) {
+        List<Integer> appID = new ArrayList();
+        appID.add(id);
+        CopyAsyncTask copyAsyncTask = new CopyAsyncTask(context, appID, dataList);
+        copyAsyncTask.execute();
     }
 
     public void load() {
